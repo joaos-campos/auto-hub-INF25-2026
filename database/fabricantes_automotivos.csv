@@ -1,0 +1,70 @@
+id,name,country,parent_group,founded
+1,Toyota,Japan,Toyota Motor Corporation,1937
+2,Lexus,Japan,Toyota Motor Corporation,1989
+3,Daihatsu,Japan,Toyota Motor Corporation,1907
+4,Honda,Japan,Honda Motor Co.,1948
+5,Acura,Japan,Honda Motor Co.,1986
+6,Nissan,Japan,Nissan Motor Co.,1933
+7,Infiniti,Japan,Nissan Motor Co.,1989
+8,Mazda,Japan,Mazda Motor Corporation,1920
+9,Subaru,Japan,Subaru Corporation,1953
+10,Mitsubishi,Japan,Mitsubishi Motors,1970
+11,Suzuki,Japan,Suzuki Motor Corporation,1909
+12,Isuzu,Japan,Isuzu Motors,1916
+13,Volkswagen,Germany,Volkswagen Group,1937
+14,Audi,Germany,Volkswagen Group,1909
+15,Porsche,Germany,Volkswagen Group,1931
+16,BMW,Germany,BMW Group,1916
+17,Mini,United Kingdom,BMW Group,1959
+18,Mercedes-Benz,Germany,Mercedes-Benz Group,1926
+19,Smart,Germany,Mercedes-Benz Group / Geely,1994
+20,Opel,Germany,Stellantis,1862
+21,Vauxhall,United Kingdom,Stellantis,1857
+22,Ford,United States,Ford Motor Company,1903
+23,Lincoln,United States,Ford Motor Company,1917
+24,Chevrolet,United States,General Motors,1911
+25,GMC,United States,General Motors,1911
+26,Cadillac,United States,General Motors,1902
+27,Buick,United States,General Motors,1903
+28,Jeep,United States,Stellantis,1943
+29,Ram,United States,Stellantis,2010
+30,Dodge,United States,Stellantis,1900
+31,Chrysler,United States,Stellantis,1925
+32,Tesla,United States,"Tesla, Inc.",2003
+33,Rivian,United States,Rivian Automotive,2009
+34,Hyundai,South Korea,Hyundai Motor Group,1967
+35,Kia,South Korea,Hyundai Motor Group,1944
+36,Genesis,South Korea,Hyundai Motor Group,2015
+37,Fiat,Italy,Stellantis,1899
+38,Alfa Romeo,Italy,Stellantis,1910
+39,Maserati,Italy,Stellantis,1914
+40,Lancia,Italy,Stellantis,1906
+41,Abarth,Italy,Stellantis,1949
+42,Ferrari,Italy,Ferrari N.V.,1947
+43,Lamborghini,Italy,Volkswagen Group,1963
+44,Peugeot,France,Stellantis,1896
+45,Citroen,France,Stellantis,1919
+46,Renault,France,Renault Group,1899
+47,DS Automobiles,France,Stellantis,2014
+48,Land Rover,United Kingdom,Tata Motors (JLR),1948
+49,Jaguar,United Kingdom,Tata Motors (JLR),1922
+50,Bentley,United Kingdom,Volkswagen Group,1919
+51,Rolls-Royce,United Kingdom,BMW Group,1904
+52,Aston Martin,United Kingdom,Aston Martin Lagonda,1913
+53,McLaren,United Kingdom,McLaren Group,1985
+54,Lotus,United Kingdom,Geely,1948
+55,MG,United Kingdom,SAIC Motor,1924
+56,Volvo,Sweden,Geely,1927
+57,Polestar,Sweden,Geely,2017
+58,SEAT,Spain,Volkswagen Group,1950
+59,Cupra,Spain,Volkswagen Group,2018
+60,Skoda,Czech Republic,Volkswagen Group,1895
+61,BYD,China,BYD Auto,2003
+62,Geely,China,Geely,1986
+63,Chery,China,Chery,1997
+64,Great Wall,China,Great Wall Motors,1984
+65,NIO,China,NIO Inc.,2014
+66,XPeng,China,XPeng Motors,2014
+67,Li Auto,China,Li Auto Inc.,2015
+68,Tata,India,Tata Motors,1945
+69,Mahindra,India,Mahindra & Mahindra,1945

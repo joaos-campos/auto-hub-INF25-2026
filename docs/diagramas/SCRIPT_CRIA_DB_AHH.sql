@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS `DB_AAH`.`T_AAH_PROPRIETARIO`
   `nr_cpf` CHAR(14) NOT NULL,
   `ds_email` VARCHAR(120) NOT NULL,
   `nr_telefone` CHAR(14) NOT NULL,
+  `ds_nome_usuario` VARCHAR(50) NOT NULL UNIQUE,
+  -- 23/06/2026 - Adição do campo para armazenar o nome de usuário utilizado para login pelo proprietário
   `ds_senha` VARCHAR(80) NOT NULL,
   PRIMARY KEY (`id_proprietario`),
   UNIQUE INDEX `UN_PROPRIETARIO_NR_CPF` (`nr_cpf` ASC),
@@ -74,6 +76,8 @@ CREATE TABLE IF NOT EXISTS `DB_AAH`.`T_AAH_PRESTADOR`
   `nm_fantasia` VARCHAR(160) NOT NULL,
   `nr_cnpj` VARCHAR(20) NOT NULL,
   `nr_telefone` CHAR(14) NOT NULL,
+  `ds_nome_usuario` VARCHAR(50) NOT NULL UNIQUE,
+  -- 23/06/2026 - Adição do campo para armazenar o nome de usuário utilizado para login pelo proprietário
   `ds_senha` VARCHAR(80) NOT NULL,
   `ds_email` VARCHAR(120) NOT NULL,
   PRIMARY KEY (`id_prestador`),
