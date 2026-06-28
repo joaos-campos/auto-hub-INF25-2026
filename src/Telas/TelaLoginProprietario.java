@@ -1,69 +1,71 @@
+
 package Telas;
 
-import javax.swing.JOptionPane;
-
-import java.sql.*;
-import java.awt.Color;
 import AcessoDB.ModuloDbConnect;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 public class TelaLoginProprietario extends javax.swing.JFrame {
     
-    // 2 - criar as variáveis necessárias à conexão
-    Connection conexao = null;  // É a variável que retorna a conexao
-    PreparedStatement pst = null; // É variável com o comando SQL
-    ResultSet rs = null; // Variável com o resultado do comando executado 
+    Connection conexao = null; 
+    PreparedStatement pst = null; 
+    ResultSet rs = null;
         
-    // 4 - Criar o método/rotina "logar()"
-    public void  logar() {
-        // Declarar a variável com o comando SQL do LOGIN!!!
+    public void  logar() 
+    {
         String sql = "select * from t_aah_proprietario where ds_nome_usuario = ? and ds_senha = ? ";
-        // Fazer o acesso na tabela desejada
        
-        try {
-            // 5 - Não ocorrendo erro
-            // Colocar o comando na conexao do banco e executá-lo
+        try 
+        {
             pst = conexao.prepareStatement(sql);
-            // Substituir as " ? " pelos campos da tela
+            
             pst.setString(1, TxtUsuario.getText());
             pst.setString(2, TxtSenha.getText());
-            // Executar a conexa....
-            rs = pst.executeQuery();  // Faz a consulta no banco!
-            // Verificar se encontrou o usuário e senha!
-            if  (rs.next()){  // na Variável "rs", temos o resultado da consulta!
-                // Se OK/encontrou... abaixo, cria-se a variável tlPrincipal
-                // e carregamos nela a Classe "TelaPrincipal";
+            
+            rs = pst.executeQuery();
+            
+            if  (rs.next())
+            { 
                 TelaPrincipalProp tlPrincipalProp = new TelaPrincipalProp(rs.getString(2));
-                // Com a Classe/TelaPrincipal na memória, devemos fazê-la visível!
+                tlPrincipalProp.setLocationRelativeTo(null);
                 tlPrincipalProp.setVisible(true);
-                this.dispose();  // O comando "this", acessar os atributos da Classe atual!                
-            }else {
+                this.dispose();
+            }
+            else
+            {
                 JOptionPane.showMessageDialog(this, "Usuário/Senha INVÁLIDOS!!! Tente outra Vez! ");
-                // Escrever na Tela, limpando o campo
                 TxtUsuario.setText("");
                 TxtSenha.setText("");                
-            }
-            
-        }catch(Exception varERRO) {
-            // Tratando o erro ao banco de dados
+            }  
+        }
+        catch(Exception varERRO) 
+        {
             JOptionPane.showMessageDialog(null,"Erro no acesso ao banco de dados: " + varERRO.toString() );
         }
     }
     
-    public TelaLoginProprietario() {
-        
+    public TelaLoginProprietario() 
+    {
         initComponents();
         
         conexao = ModuloDbConnect.connector();
         
-         if (conexao != null) {
+        if (conexao != null) 
+        {
             lblMensagens.setText("Conexão OK!!!");
             lblMensagens.setForeground(Color.blue);
-        }else {
+        }
+        else
+        {
             lblMensagens.setText("ERRO - NÃO CONECTADO!");
             lblMensagens.setForeground(Color.red);
         }
     }
     
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -75,6 +77,7 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
         TxtSenha = new javax.swing.JPasswordField();
         BtnEntrar = new javax.swing.JButton();
         BtnCadastrar = new javax.swing.JButton();
+        BtnVoltarLogProp = new javax.swing.JButton();
         lblMensagens = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,7 +88,6 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
 
         LblSenha.setText("Senha");
 
-        TxtUsuario.setToolTipText("");
         TxtUsuario.addActionListener(this::TxtUsuarioActionPerformed);
 
         BtnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -96,20 +98,26 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
         BtnCadastrar.setText("Cadastrar-se");
         BtnCadastrar.addActionListener(this::BtnCadastrarActionPerformed);
 
+        BtnVoltarLogProp.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        BtnVoltarLogProp.setText("Voltar");
+        BtnVoltarLogProp.addActionListener(this::BtnVoltarLogPropActionPerformed);
+
         javax.swing.GroupLayout PnlLoginLayout = new javax.swing.GroupLayout(PnlLogin);
         PnlLogin.setLayout(PnlLoginLayout);
         PnlLoginLayout.setHorizontalGroup(
             PnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlLoginLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(PnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TxtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                    .addComponent(LblSenha)
+                .addContainerGap()
+                .addGroup(PnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LblUsuario)
-                    .addComponent(TxtSenha)
+                    .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblSenha)
+                    .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnEntrar)
-                    .addComponent(BtnCadastrar))
-                .addContainerGap(56, Short.MAX_VALUE))
+                    .addGroup(PnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(BtnVoltarLogProp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnCadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         PnlLoginLayout.setVerticalGroup(
             PnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +126,7 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
                 .addComponent(LblUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,7 +134,9 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
                 .addComponent(BtnEntrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnCadastrar)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnVoltarLogProp)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblMensagens.setText("Mensagens...");
@@ -137,18 +147,18 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PnlLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(16, 16, 16)
                 .addComponent(lblMensagens)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(95, Short.MAX_VALUE)
+                .addContainerGap(85, Short.MAX_VALUE)
                 .addComponent(PnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblMensagens)
-                .addGap(16, 16, 16))
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -170,12 +180,22 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_BtnCadastrarActionPerformed
 
+    private void BtnVoltarLogPropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVoltarLogPropActionPerformed
+        // TODO add your handling code here:
+        TelaInicial telaInicio = new TelaInicial();
+        telaInicio.setLocationRelativeTo(null);
+        telaInicio.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnVoltarLogPropActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaLoginProprietario().setVisible(true);
+        });
         /* Set the Nimbus look and feel */
-
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -187,28 +207,20 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginProprietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginProprietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginProprietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaLoginProprietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            
+            
         //</editor-fold>
-        
+
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaLoginProprietario().setVisible(true);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new TelaLoginProprietario().setVisible(true));
+    }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCadastrar;
     private javax.swing.JButton BtnEntrar;
+    private javax.swing.JButton BtnVoltarLogProp;
     private javax.swing.JLabel LblSenha;
     private javax.swing.JLabel LblUsuario;
     private javax.swing.JPanel PnlLogin;

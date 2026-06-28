@@ -46,6 +46,7 @@ public class TelaInicial extends javax.swing.JFrame {
         BtnProprietario.addActionListener(this::BtnProprietarioActionPerformed);
 
         BtnPrestador.setText("Sou prestador");
+        BtnPrestador.addActionListener(this::BtnPrestadorActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,6 +111,14 @@ public class TelaInicial extends javax.swing.JFrame {
         telaLogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BtnProprietarioActionPerformed
+
+    private void BtnPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrestadorActionPerformed
+        // TODO add your handling code here:
+        TelaLoginPrestador telaLogPresta = new TelaLoginPrestador();
+        telaLogPresta.setLocationRelativeTo(null);
+        telaLogPresta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnPrestadorActionPerformed
         
     
     public static void main(String args[]) {
