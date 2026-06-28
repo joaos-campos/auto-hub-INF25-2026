@@ -3,18 +3,92 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Telas;
+import AcessoDB.*;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author ALUNO
- */
 public class TelaCadastroPropri extends javax.swing.JFrame {
+    
+    Connection conexao = null;
+    
+    public boolean CamposCadastro_SaoValidos()
+    {
+        boolean[] validacoes = new boolean[8];
+        
+        for (int i = 0; i < validacoes.length; i++)
+        {
+            validacoes[i] = true;
+            //System.out.println(validacoes[i]);
+        }
+        
+        if ((TxtNome.getText().isEmpty() == true) || (TxtNome.getText().isBlank() == true))
+        {
+            JOptionPane.showMessageDialog(null, "Digite um nome válido!");
+            validacoes[0] = false;
+        }
+        
+        if ((TxtDataNasc.getText().isEmpty() == true) || (TxtDataNasc.getText().isBlank() == true))
+        {
+            JOptionPane.showMessageDialog(null, "Digite uma data de nascimento válida!");
+            validacoes[1] = false;
+        }
+        
+        if ((TxtCPF.getText().isEmpty() == true) || (TxtCPF.getText().isBlank() == true))
+        {
+            JOptionPane.showMessageDialog(null, "Digite um CPF válido!");
+            validacoes[2] = false;
+        }
+        
+        if ((TxtEmail.getText().isEmpty() == true) || (TxtEmail.getText().isBlank() == true))
+        {
+            JOptionPane.showMessageDialog(null, "Digite um e-mail válido!");
+            validacoes[3] = false;
+        }
+        
+        if ((TxtTelefone.getText().isEmpty() == true) || (TxtTelefone.getText().isBlank() == true))
+        {
+            JOptionPane.showMessageDialog(null, "Digite um telefone válido!");
+            validacoes[4] = false;
+        }
+        
+        if ((TxtNomeUsu.getText().isEmpty() == true) || (TxtNomeUsu.getText().isBlank() == true))
+        {
+            JOptionPane.showMessageDialog(null, "Digite um nome de usuário válido!");
+            validacoes[5] = false;
+        }
+        
+        if (((TxtSenha.getText().isEmpty() == true) || (TxtSenha.getText().isBlank() == true)) && 
+                ((TxtConfSenha.getText().isEmpty() == true) || (TxtConfSenha.getText().isBlank() == true)))
+        {
+            JOptionPane.showMessageDialog(null, "Digite uma senha válida!");
+            validacoes[6] = false;
+        }
+        else if (!TxtSenha.getText().equals(TxtConfSenha.getText()))
+        {
+            JOptionPane.showMessageDialog(null, "As senhas são diferentes! Confira a senha digita no campo 'Senha' e 'Confirme sua senha'!");
+            validacoes[7] = false;
+        }
+        
+        boolean is_valid = true;
+        
+        for (int i = 0; i < validacoes.length; i++)
+        {
+            if (validacoes[i] == false)
+            {
+                //System.out.println(validacoes[i]);
+                is_valid = false;
+            }
+        }
+        
+        return is_valid;
+    }
 
     /**
      * Creates new form TelaCadastroPropri
      */
     public TelaCadastroPropri() {
         initComponents();
+        conexao = ModuloDbConnect.connector();
     }
 
     /**
@@ -31,7 +105,7 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
         LblDate = new javax.swing.JLabel();
         TxtNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        TxtDate = new javax.swing.JTextField();
+        TxtDataNasc = new javax.swing.JTextField();
         LblCPF = new javax.swing.JLabel();
         TxtCPF = new javax.swing.JTextField();
         LblEmail = new javax.swing.JLabel();
@@ -44,6 +118,8 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
         TxtConfSenha = new javax.swing.JPasswordField();
         BtnCadastrar = new javax.swing.JButton();
         BtnVoltar = new javax.swing.JButton();
+        TxtNomeUsu = new javax.swing.JTextField();
+        LblNomeUsu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro Proprietário");
@@ -59,8 +135,8 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Crie uma conta no AutoHub");
 
-        TxtDate.setForeground(new java.awt.Color(204, 204, 204));
-        TxtDate.setText("dd/mm/aa");
+        TxtDataNasc.setForeground(new java.awt.Color(204, 204, 204));
+        TxtDataNasc.setText("dd/mm/aa");
 
         LblCPF.setText("Digite seu CPF");
 
@@ -75,6 +151,12 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
         LblTelefone.setText("Telefone");
 
         TxtEmail.setForeground(new java.awt.Color(204, 204, 204));
+        TxtEmail.setText("seu_nome@site.com.br");
+        TxtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtEmailActionPerformed(evt);
+            }
+        });
 
         LblSenha.setText("Senha");
 
@@ -85,8 +167,18 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
 
         TxtConfSenha.setForeground(new java.awt.Color(204, 204, 204));
         TxtConfSenha.setText("jPasswordField1");
+        TxtConfSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtConfSenhaActionPerformed(evt);
+            }
+        });
 
         BtnCadastrar.setText("Cadastrar-se");
+        BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCadastrarActionPerformed(evt);
+            }
+        });
 
         BtnVoltar.setText("Voltar");
         BtnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +187,16 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
             }
         });
 
+        TxtNomeUsu.setForeground(new java.awt.Color(204, 204, 204));
+        TxtNomeUsu.setText("usuario_07");
+        TxtNomeUsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtNomeUsuActionPerformed(evt);
+            }
+        });
+
+        LblNomeUsu.setText("Nome de usuário");
+
         javax.swing.GroupLayout PnlCadastroLayout = new javax.swing.GroupLayout(PnlCadastro);
         PnlCadastro.setLayout(PnlCadastroLayout);
         PnlCadastroLayout.setHorizontalGroup(
@@ -102,6 +204,23 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
             .addGroup(PnlCadastroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PnlCadastroLayout.createSequentialGroup()
+                        .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblNome)
+                            .addComponent(LblDate)
+                            .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblSenha)
+                            .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblConfSenha)
+                            .addComponent(TxtConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(BtnVoltar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnCadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(TxtCPF, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(LblCPF)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCadastroLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,61 +228,50 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGap(104, 104, 104))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCadastroLayout.createSequentialGroup()
-                                .addComponent(TxtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
-                    .addGroup(PnlCadastroLayout.createSequentialGroup()
-                        .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCadastroLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(TxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PnlCadastroLayout.createSequentialGroup()
                                 .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LblNome)
-                                    .addComponent(LblDate)
-                                    .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LblCPF)
-                                    .addComponent(LblEmail)
-                                    .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(PnlCadastroLayout.createSequentialGroup()
-                        .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LblTelefone)
-                            .addComponent(LblSenha)
-                            .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LblConfSenha)
-                            .addComponent(TxtConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(BtnVoltar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BtnCadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(LblEmail)
+                                        .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(LblTelefone)))
+                                .addContainerGap())))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCadastroLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TxtNomeUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblNomeUsu))
+                .addContainerGap())
         );
         PnlCadastroLayout.setVerticalGroup(
             PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlCadastroLayout.createSequentialGroup()
                 .addComponent(jLabel3)
-                .addGap(21, 21, 21)
+                .addGap(15, 15, 15)
                 .addComponent(LblNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(LblDate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TxtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TxtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LblCPF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(LblEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LblTelefone)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LblNomeUsu)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TxtNomeUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(LblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,11 +279,11 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
                 .addComponent(LblConfSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addComponent(BtnCadastrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnVoltar)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,6 +309,40 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
         telaLogin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BtnVoltarActionPerformed
+
+    private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
+        if (CamposCadastro_SaoValidos() == true)
+        {
+            ModuloDbDML db = new ModuloDbDML(conexao);
+            
+            long novo_id = db.inserirRetornandoId("INSERT INTO t_aah_proprietario "
+                    + "(nm_proprietario, dt_nascimento, nr_cpf, ds_email, nr_telefone, ds_senha, ds_nome_usuario) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)", 
+                    TxtNome.getText(), TxtDataNasc.getText(), TxtCPF.getText(), TxtEmail.getText(), TxtTelefone.getText(), TxtSenha.getText(), TxtNomeUsu.getText());
+            
+            if (novo_id != -1) 
+            {
+                JOptionPane.showMessageDialog(null, "Cadastro do usuário " + TxtNome.getText() + " efetuado com sucesso!");
+                System.out.println(novo_id);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Campo(s) inválido(s)! Corrija e tente novamente!");
+        }
+    }//GEN-LAST:event_BtnCadastrarActionPerformed
+
+    private void TxtConfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtConfSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtConfSenhaActionPerformed
+
+    private void TxtNomeUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNomeUsuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtNomeUsuActionPerformed
+
+    private void TxtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,14 +387,16 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
     private javax.swing.JLabel LblDate;
     private javax.swing.JLabel LblEmail;
     private javax.swing.JLabel LblNome;
+    private javax.swing.JLabel LblNomeUsu;
     private javax.swing.JLabel LblSenha;
     private javax.swing.JLabel LblTelefone;
     private javax.swing.JPanel PnlCadastro;
     private javax.swing.JTextField TxtCPF;
     private javax.swing.JPasswordField TxtConfSenha;
-    private javax.swing.JTextField TxtDate;
+    private javax.swing.JTextField TxtDataNasc;
     private javax.swing.JTextField TxtEmail;
     private javax.swing.JTextField TxtNome;
+    private javax.swing.JTextField TxtNomeUsu;
     private javax.swing.JPasswordField TxtSenha;
     private javax.swing.JTextField TxtTelefone;
     private javax.swing.JLabel jLabel3;

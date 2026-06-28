@@ -85,6 +85,7 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
 
         LblSenha.setText("Senha");
 
+        TxtUsuario.setToolTipText("");
         TxtUsuario.addActionListener(this::TxtUsuarioActionPerformed);
 
         BtnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
