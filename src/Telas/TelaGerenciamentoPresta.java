@@ -144,9 +144,9 @@ public class TelaGerenciamentoPresta extends javax.swing.JFrame {
 
     private void BtnVoltarGerPrestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVoltarGerPrestaActionPerformed
         // TODO add your handling code here:
-        TelaPrincipalPresta telaPrinPresta = new TelaPrincipalPresta();
-        telaPrinPresta.setLocationRelativeTo(null);
-        telaPrinPresta.setVisible(true);
+        TelaPrincipalPresta tlPrincipalPresta = new TelaPrincipalPresta("");
+        tlPrincipalPresta.setLocationRelativeTo(null);
+        tlPrincipalPresta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BtnVoltarGerPrestaActionPerformed
 
@@ -175,6 +175,8 @@ public class TelaGerenciamentoPresta extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaGerenciamentoPresta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

@@ -43,8 +43,8 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="TxtUsuario" pref="400" max="32767" attributes="0"/>
-              <Component id="TxtSenha" alignment="0" max="32767" attributes="0"/>
+              <Component id="TxtUsuarioPresta" pref="400" max="32767" attributes="0"/>
+              <Component id="TxtSenhaPresta" alignment="0" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="LblUsuario" min="-2" max="-2" attributes="0"/>
@@ -54,6 +54,11 @@
                   </Group>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblMensagens" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -62,16 +67,18 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="LblUsuario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="TxtUsuario" min="-2" max="-2" attributes="0"/>
+                  <Component id="TxtUsuarioPresta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="LblSenha" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="TxtSenha" min="-2" max="-2" attributes="0"/>
+                  <Component id="TxtSenhaPresta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="BtnEntrarPrest" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="BtnCadastrarPrestador" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="70" max="32767" attributes="0"/>
+                  <EmptySpace pref="48" max="32767" attributes="0"/>
+                  <Component id="lblMensagens" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -82,9 +89,9 @@
             <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="TxtUsuario">
+        <Component class="javax.swing.JTextField" name="TxtUsuarioPresta">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtUsuarioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtUsuarioPrestaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="LblSenha">
@@ -92,7 +99,7 @@
             <Property name="text" type="java.lang.String" value="Senha"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="TxtSenha">
+        <Component class="javax.swing.JPasswordField" name="TxtSenhaPresta">
         </Component>
         <Component class="javax.swing.JButton" name="BtnEntrarPrest">
           <Properties>
@@ -115,6 +122,11 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCadastrarPrestadorActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblMensagens">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mensagens..."/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
