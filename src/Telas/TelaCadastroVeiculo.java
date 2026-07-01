@@ -4,19 +4,59 @@
  */
 package Telas;
 
+import AcessoDB.ModuloDbConnect;
+import AcessoDB.ModuloDbDML;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author ALUNO
  */
 public class TelaCadastroVeiculo extends javax.swing.JFrame {
-
-    /**
-     * Creates new form TelaCadastroVeiculo
-     */
+    
+    Connection conexao = null;
+    
     public TelaCadastroVeiculo() {
         initComponents();
+        this.getContentPane().setBackground(new java.awt.Color(198, 200, 200));
+        conexao = ModuloDbConnect.connector();
+        CarregarMarcas();
     }
 
+    private void CarregarMarcas()
+    {
+        ModuloDbDML db = new ModuloDbDML(conexao);
+        
+        List<Map<String, Object>> resultado;
+        
+        try 
+        {
+            ComboBoxMarca.removeAllItems();
+            
+            resultado = db.consultar("select nm_marca from t_aah_marca order by nm_marca asc");
+            System.out.println("carregarMarcas rodou, linhas = " + resultado.size());
+            
+            for (Map<String, Object> linha : resultado) 
+            {
+                Object valor = linha.get("nm_marca");
+                
+                if (valor != null) 
+                {
+                    ComboBoxMarca.addItem(valor.toString());
+                }
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            Logger.getLogger(TelaCadastroVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,9 +66,9 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         LblMarca = new javax.swing.JLabel();
-        TxtMarca = new javax.swing.JTextField();
         LblModelo = new javax.swing.JLabel();
         TxtModelo = new javax.swing.JTextField();
         LblAno = new javax.swing.JLabel();
@@ -39,9 +79,18 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         TxtCor = new javax.swing.JTextField();
         BtnCadastrar = new javax.swing.JButton();
         BtnVoltar = new javax.swing.JButton();
+        ComboBoxMarca = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastre seu veículo");
+        setBackground(new java.awt.Color(198, 200, 200));
+        setForeground(java.awt.Color.white);
+        setResizable(false);
+
+        jPanel2.setBackground(new java.awt.Color(198, 200, 200));
 
         LblMarca.setText("Marca");
 
@@ -53,12 +102,25 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
 
         LblCor.setText("Cor");
 
+        BtnCadastrar.setBackground(new java.awt.Color(239, 60, 0));
+        BtnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnCadastrar.setForeground(new java.awt.Color(33, 40, 68));
         BtnCadastrar.setText("Cadastrar");
 
+        BtnVoltar.setBackground(new java.awt.Color(32, 32, 63));
+        BtnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnVoltar.setForeground(new java.awt.Color(255, 255, 255));
         BtnVoltar.setText("Voltar");
         BtnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnVoltarActionPerformed(evt);
+            }
+        });
+
+        ComboBoxMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBoxMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxMarcaActionPerformed(evt);
             }
         });
 
@@ -68,21 +130,20 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(LblMarca)
-                    .addComponent(TxtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblModelo)
-                    .addComponent(TxtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
                     .addComponent(LblAno)
-                    .addComponent(TxtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtAno, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
                     .addComponent(LblPlaca)
-                    .addComponent(TxtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
                     .addComponent(LblCor)
-                    .addComponent(TxtCor, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(BtnVoltar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnCadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(TxtCor, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(BtnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ComboBoxMarca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +151,7 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(LblMarca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TxtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ComboBoxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LblModelo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -111,33 +172,38 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
                 .addComponent(BtnCadastrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnVoltar)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        jLabel2.setBackground(new java.awt.Color(32, 32, 63));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(247, 250, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Cadastre seu veículo");
+        jLabel2.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(52, 52, 52)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVoltarActionPerformed
@@ -146,6 +212,11 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
         telaPrincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BtnVoltarActionPerformed
+
+    private void ComboBoxMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxMarcaActionPerformed
+
+
+    }//GEN-LAST:event_ComboBoxMarcaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,6 +257,7 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCadastrar;
     private javax.swing.JButton BtnVoltar;
+    private javax.swing.JComboBox<String> ComboBoxMarca;
     private javax.swing.JLabel LblAno;
     private javax.swing.JLabel LblCor;
     private javax.swing.JLabel LblMarca;
@@ -193,9 +265,9 @@ public class TelaCadastroVeiculo extends javax.swing.JFrame {
     private javax.swing.JLabel LblPlaca;
     private javax.swing.JTextField TxtAno;
     private javax.swing.JTextField TxtCor;
-    private javax.swing.JTextField TxtMarca;
     private javax.swing.JTextField TxtModelo;
     private javax.swing.JTextField TxtPlaca;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
