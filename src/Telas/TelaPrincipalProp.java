@@ -5,6 +5,9 @@
 package Telas;
 
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -167,10 +170,14 @@ public class TelaPrincipalProp extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        TelaGerenciamentoVeiculo telaGerencia = new TelaGerenciamentoVeiculo();
-        telaGerencia.setLocationRelativeTo(null);
-        telaGerencia.setVisible(true);
-        this.dispose();
+        try {
+            TelaGerenciamentoVeiculo telaGerencia = new TelaGerenciamentoVeiculo();
+            telaGerencia.setLocationRelativeTo(null);
+            telaGerencia.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaPrincipalProp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

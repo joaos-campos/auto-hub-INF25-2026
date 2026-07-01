@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -23,11 +23,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="91" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -35,7 +38,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -48,24 +51,36 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="LblNmEmpresa" min="-2" max="-2" attributes="0"/>
-                      <Component id="TxtNmEmpresa" min="-2" pref="356" max="-2" attributes="0"/>
+                      <Component id="TxtNmEmpresa" max="32767" attributes="0"/>
                       <Component id="LblCNPJ" min="-2" max="-2" attributes="0"/>
-                      <Component id="TxtCNPJ" min="-2" pref="356" max="-2" attributes="0"/>
                       <Component id="LblTelefone" min="-2" max="-2" attributes="0"/>
-                      <Component id="TxtTelefone" min="-2" pref="356" max="-2" attributes="0"/>
+                      <Component id="TxtCNPJ" alignment="0" max="32767" attributes="0"/>
+                      <Component id="TxtTelefonePresta" max="32767" attributes="0"/>
+                      <Component id="BtnVoltar" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                      <Component id="LblSenhaPresta" min="-2" max="-2" attributes="0"/>
+                      <Component id="LblEmailPresta" min="-2" max="-2" attributes="0"/>
+                      <Component id="TxtEmailPresta" alignment="0" max="32767" attributes="0"/>
                       <Component id="BtnAvancar" min="-2" max="-2" attributes="0"/>
-                      <Component id="BtnVoltar" min="-2" max="-2" attributes="0"/>
+                      <Component id="LblNmUsuPresta" min="-2" max="-2" attributes="0"/>
+                      <Component id="TxtNmUsuPresta" alignment="0" min="-2" pref="356" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="TxtSenhaPresta" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TxtConfSenhaPresta" alignment="0" max="32767" attributes="0"/>
+                          <Component id="LblConfSenhaPresta" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="0" pref="44" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Component id="LblNmEmpresa" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="TxtNmEmpresa" min="-2" max="-2" attributes="0"/>
@@ -76,12 +91,28 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="LblTelefone" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="TxtTelefone" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="BtnAvancar" min="-2" max="-2" attributes="0"/>
+                  <Component id="TxtTelefonePresta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="LblEmailPresta" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="TxtEmailPresta" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="LblNmUsuPresta" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="TxtNmUsuPresta" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="LblSenhaPresta" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="TxtSenhaPresta" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="LblConfSenhaPresta" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="TxtConfSenhaPresta" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
+                  <Component id="BtnAvancar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="BtnVoltar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="41" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -99,18 +130,13 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Nome completo"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtNmEmpresaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="LblCNPJ">
           <Properties>
             <Property name="text" type="java.lang.String" value="CNPJ"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="TxtCNPJ">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="00.000.000/0000-00"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="LblTelefone">
@@ -118,18 +144,13 @@
             <Property name="text" type="java.lang.String" value="Telefone"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="TxtTelefone">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="(00)00000-0000"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="BtnAvancar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Avan&#xe7;ar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAvancarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnVoltar">
           <Properties>
@@ -138,6 +159,88 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnVoltarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="TxtCNPJ">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="##.###.###/####-##" subtype="-1" type="5"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="00.000.000/0000-00" noResource="true"/>
+            <Property name="toolTipText" type="java.lang.String" value="Informe seu CNPJ"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtCNPJActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="TxtTelefonePresta">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="(##)#####-####" subtype="-1" type="5"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="(00)00000-0000"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtTelefonePrestaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LblSenhaPresta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Digite uma senha"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="TxtSenhaPresta">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LblConfSenhaPresta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Confirme sua senha"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="TxtConfSenhaPresta">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LblEmailPresta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="E-mail"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="TxtEmailPresta">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="seu_nome@site.com.br"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LblNmUsuPresta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nome de usu&#xe1;rio"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="TxtNmUsuPresta">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="user_01"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

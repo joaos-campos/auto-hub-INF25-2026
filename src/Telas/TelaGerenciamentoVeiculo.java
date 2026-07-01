@@ -4,17 +4,37 @@
  */
 package Telas;
 
+import AcessoDB.ModuloDbConnect;
+import AcessoDB.ModuloDbDML;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ALUNO
  */
 public class TelaGerenciamentoVeiculo extends javax.swing.JFrame {
 
+    Connection conexao = null;
+    
     /**
      * Creates new form TelaGerenciamentoVeiculo
+     * @throws java.sql.SQLException
      */
-    public TelaGerenciamentoVeiculo() {
+    public TelaGerenciamentoVeiculo() throws SQLException {
         initComponents();
+        
+        conexao = ModuloDbConnect.connector();
+        
+        ModuloDbDML dbDML = new ModuloDbDML(conexao);
+        
+        DefaultTableModel tableResultado = dbDML.consultarTabela("select * from t_aah_veiculo where id_veiculo = ?;", "1");
+        
+        TableVeiculo.setModel(tableResultado);
     }
 
     /**
@@ -34,7 +54,7 @@ public class TelaGerenciamentoVeiculo extends javax.swing.JFrame {
         BtnIntercorrências = new javax.swing.JButton();
         BtnVoltar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TableVeiculo = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -95,7 +115,7 @@ public class TelaGerenciamentoVeiculo extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableVeiculo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}
             },
@@ -103,9 +123,9 @@ public class TelaGerenciamentoVeiculo extends javax.swing.JFrame {
                 "Veículo", "Modelo", "Marca", "Placa", "Ano", "Cor"
             }
         ));
-        jTable1.setShowGrid(true);
-        jTable1.setSurrendersFocusOnKeystroke(true);
-        jScrollPane1.setViewportView(jTable1);
+        TableVeiculo.setShowGrid(true);
+        TableVeiculo.setSurrendersFocusOnKeystroke(true);
+        jScrollPane1.setViewportView(TableVeiculo);
 
         jMenu1.setText("Veículo");
         jMenuBar1.add(jMenu1);
@@ -154,11 +174,13 @@ public class TelaGerenciamentoVeiculo extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LblApelido)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addComponent(LblApelido)
+                .addGap(0, 539, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,19 +205,19 @@ public class TelaGerenciamentoVeiculo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void BtnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVoltarActionPerformed
-        TelaPrincipalProp telaPrincipal = new TelaPrincipalProp("");
-        telaPrincipal.setLocationRelativeTo(null);
-        telaPrincipal.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_BtnVoltarActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         TelaAgendamento telaAgenda = new TelaAgendamento();
         telaAgenda.setLocationRelativeTo(null);
         telaAgenda.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void BtnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVoltarActionPerformed
+        TelaPrincipalProp telaPrincipal = new TelaPrincipalProp("");
+        telaPrincipal.setLocationRelativeTo(null);
+        telaPrincipal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,7 +250,11 @@ public class TelaGerenciamentoVeiculo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaGerenciamentoVeiculo().setVisible(true);
+                try {
+                    new TelaGerenciamentoVeiculo().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaGerenciamentoVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -240,6 +266,7 @@ public class TelaGerenciamentoVeiculo extends javax.swing.JFrame {
     private javax.swing.JButton BtnIntercorrências;
     private javax.swing.JButton BtnVoltar;
     private javax.swing.JLabel LblApelido;
+    private javax.swing.JTable TableVeiculo;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -252,6 +279,5 @@ public class TelaGerenciamentoVeiculo extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

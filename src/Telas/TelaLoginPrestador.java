@@ -6,6 +6,9 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class TelaLoginPrestador extends javax.swing.JFrame {
@@ -159,7 +162,12 @@ public class TelaLoginPrestador extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnEntrarPrestActionPerformed
 
     private void BtnCadastrarPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarPrestadorActionPerformed
-        TelaCadastroPresta telaCadPrest = new TelaCadastroPresta();
+        TelaCadastroPresta telaCadPrest = null;
+        try {
+            telaCadPrest = new TelaCadastroPresta();
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaLoginPrestador.class.getName()).log(Level.SEVERE, null, ex);
+        }
         telaCadPrest.setLocationRelativeTo(null);
         telaCadPrest.setVisible(true);
         this.dispose();

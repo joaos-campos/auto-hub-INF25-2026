@@ -4,6 +4,10 @@
  */
 package Telas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author ALUNO
@@ -234,10 +238,15 @@ public class TelaAgendamento extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnVoltarActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        TelaGerenciamentoVeiculo telaGerencia = new TelaGerenciamentoVeiculo();
-        telaGerencia.setLocationRelativeTo(null);
-        telaGerencia.setVisible(true);
-        this.dispose();
+        TelaGerenciamentoVeiculo telaGerencia;
+        try {
+            telaGerencia = new TelaGerenciamentoVeiculo();
+            telaGerencia.setLocationRelativeTo(null);
+            telaGerencia.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaAgendamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed

@@ -173,30 +173,4 @@ public class ModuloDbDML
             return -1; // -1 sinaliza falha
         }
     }
-    
-    /*
-    public long inserirRetornandoId(String sql, Object... parametros) 
-    {
-        try (PreparedStatement ps = _connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) 
-        {
-            preencherParametros(ps, parametros);
-            ps.executeUpdate();
-            
-            try (ResultSet chaves = ps.getGeneratedKeys()) 
-            {
-                if (chaves.next()) 
-                {
-                    return chaves.getLong(1); // primeira coluna gerada = o ID
-                }
-            }
-            
-            return -1; // executou, mas o driver não retornou chave
-        } 
-        catch (SQLException erro) 
-        {
-            System.err.println("Erro ao inserir: " + erro.getMessage());
-            return -1; // -1 sinaliza falha
-        }
-    }
-    */
 }
