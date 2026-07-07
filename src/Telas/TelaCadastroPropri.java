@@ -4,6 +4,9 @@
  */
 package Telas;
 import AcessoDB.*;
+import static AutoHubUtil.ButtonsUtil.ActivateOnEnter;
+import static AutoHubUtil.ValidarCpfUtil.ValidarCpf;
+import AutoHubUtil.DateUtil;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Connection;
@@ -14,6 +17,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.time.LocalDate;
 
 public class TelaCadastroPropri extends javax.swing.JFrame {
     
@@ -53,6 +58,14 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "Digite um CPF válido!");
             validacoes[2] = false;
+        }
+        else
+        {
+            if (ValidarCpf(TxtCPF.getText()) == false)
+            {
+                JOptionPane.showMessageDialog(null, "Digite um CPF válido!");
+                validacoes[2] = false;
+            }
         }
         
         if ((TxtEmail.getText().isEmpty() == true) || (TxtEmail.getText().isBlank() == true))
@@ -106,16 +119,23 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
     public TelaCadastroPropri() throws ParseException
     {   
         initComponents();
-        
         PostInitComponents();
-        
+        DefineTextFieldsBehaviour();
+    }
+    
+    private void PostInitComponents()
+    {
         conexao = ModuloDbConnect.connector();
+        ActivateOnEnter(BtnCadastrar);
+        ActivateOnEnter(BtnVoltar);
+        this.getContentPane().setBackground(new Color(198, 200, 200));   
+        this.setSize(575, 650); 
     }
     
     /**
     * @throws java.text.ParseException
     */
-    private void PostInitComponents()  throws ParseException 
+    private void DefineTextFieldsBehaviour()  throws ParseException 
     {
         // <editor-fold defaultstate="collapsed" desc="Define comportamento TxtCPF"> 
         // =================================================================================
@@ -447,8 +467,12 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setBackground(new java.awt.Color(32, 32, 63));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(247, 250, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Crie uma conta no AutoHub");
+        jLabel3.setOpaque(true);
 
         LblCPF.setText("Digite seu CPF");
 
@@ -482,8 +506,9 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
             }
         });
 
-        BtnCadastrar.setBackground(new java.awt.Color(239, 60, 0));
-        BtnCadastrar.setForeground(new java.awt.Color(247, 250, 255));
+        BtnCadastrar.setBackground(new java.awt.Color(255, 212, 59));
+        BtnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnCadastrar.setForeground(new java.awt.Color(33, 40, 68));
         BtnCadastrar.setText("Cadastrar-se");
         BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -491,6 +516,9 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
             }
         });
 
+        BtnVoltar.setBackground(new java.awt.Color(32, 32, 63));
+        BtnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnVoltar.setForeground(new java.awt.Color(255, 255, 255));
         BtnVoltar.setText("Voltar");
         BtnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -557,52 +585,36 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
             .addGroup(PnlCadastroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCadastroLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCadastroLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(104, 104, 104))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCadastroLayout.createSequentialGroup()
-                                    .addComponent(LblTelefone)
-                                    .addGap(316, 316, 316))
-                                .addGroup(PnlCadastroLayout.createSequentialGroup()
-                                    .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap()))
-                            .addGroup(PnlCadastroLayout.createSequentialGroup()
-                                .addComponent(LblEmail)
-                                .addGap(57, 57, 57))))
+                    .addComponent(TxtTelefone)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                    .addComponent(TxtNomeUsu)
                     .addGroup(PnlCadastroLayout.createSequentialGroup()
                         .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtTelefone)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCadastroLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtNomeUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LblNomeUsu)))
-                            .addGroup(PnlCadastroLayout.createSequentialGroup()
-                                .addGroup(PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(TxtDataNasc, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtCPF, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LblNome, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LblDate, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                                    .addComponent(LblSenha, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LblConfSenha, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtConfSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BtnVoltar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(BtnCadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(LblCPF, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                            .addComponent(LblNome)
+                            .addComponent(LblDate)
+                            .addComponent(LblSenha)
+                            .addComponent(LblConfSenha)
+                            .addComponent(LblCPF)
+                            .addComponent(LblEmail)
+                            .addComponent(LblTelefone)
+                            .addComponent(LblNomeUsu))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(TxtSenha)
+                    .addComponent(TxtConfSenha)
+                    .addComponent(TxtEmail)
+                    .addComponent(TxtCPF)
+                    .addComponent(TxtDataNasc)
+                    .addComponent(TxtNome)
+                    .addComponent(BtnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         PnlCadastroLayout.setVerticalGroup(
             PnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlCadastroLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(15, 15, 15)
+                .addGap(9, 9, 9)
                 .addComponent(LblNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -614,19 +626,19 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
                 .addComponent(LblCPF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LblEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(LblTelefone)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LblNomeUsu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtNomeUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -677,24 +689,53 @@ public class TelaCadastroPropri extends javax.swing.JFrame {
             
             ModuloDbDML db = new ModuloDbDML(conexao);
             
-            long novo_id = db.inserirRetornandoId("INSERT INTO t_aah_proprietario "
-                    + "(nm_proprietario, dt_nascimento, nr_cpf, ds_email, nr_telefone, ds_senha, ds_nome_usuario) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?)", 
-                    _txtNome, _txtDataNasc, _txtCPF, _txtEmail, _txtTelefone, _txtSenha, _txtNomeUsu);
+            String sql = "SELECT nr_cpf FROM t_aah_proprietario where nr_cpf = ?";
             
-            if (novo_id != -1) 
-            {
-                JOptionPane.showMessageDialog(null, "Cadastro do usuário " + TxtNome.getText() + " efetuado com sucesso!");
-                System.out.println(novo_id);
-                
-                try 
+            boolean ehCpfRepetido = false;
+            String cpfRepetido = "";
+            
+            try 
+            {  
+                ResultSet rs = db.consultarResultSet(sql, _txtCPF);
+
+                if (rs.next())
                 {
-                    LimparTela();
-                } 
-                catch (ParseException ex) 
-                {
-                    Logger.getLogger(TelaCadastroPropri.class.getName()).log(Level.SEVERE, null, ex);
+                    cpfRepetido = rs.getString("nr_cpf");
+                    
+                    if (cpfRepetido.equals(_txtCPF) || cpfRepetido.replaceAll("\\D", "").equals(_txtCPF))
+                    {
+                        ehCpfRepetido = true;
+                    }
                 }
+            } 
+            catch (Exception e) 
+            {
+                 javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar dados: " + e.getMessage());
+                 e.printStackTrace();               
+            }
+            
+            if (!ehCpfRepetido)
+            {
+                long novo_id = db.inserirRetornandoId("INSERT INTO t_aah_proprietario "
+                        + "(nm_proprietario, dt_nascimento, nr_cpf, ds_email, nr_telefone, ds_senha, ds_nome_usuario) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?)", 
+                        _txtNome, _txtDataNasc, _txtCPF, _txtEmail, _txtTelefone, _txtSenha, _txtNomeUsu);
+
+                if (novo_id != -1) 
+                {
+                    JOptionPane.showMessageDialog(null, "Cadastro do usuário " + TxtNome.getText() + " efetuado com sucesso!");
+                    JOptionPane.showMessageDialog(null, "Você será redirecionado para a tela de Login!");
+
+                    TelaLoginProprietario tlLgProprietario = new TelaLoginProprietario();
+                    tlLgProprietario.setLocationRelativeTo(null);
+                    tlLgProprietario.setVisible(true);
+                    this.dispose();
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "O nº de CPF " + _txtCPF + " já está cadastrado! Verifique o CPF e tente novamente!");
+                TxtCPF.requestFocus();
             }
         }
         else

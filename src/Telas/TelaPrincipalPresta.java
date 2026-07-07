@@ -5,6 +5,7 @@
 package Telas;
 
 import java.awt.Color;
+import javax.swing.plaf.basic.BasicMenuBarUI;
 
 /**
  *
@@ -14,12 +15,24 @@ public class TelaPrincipalPresta extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaPrincipalPresta
-     * @param nmUsuario
+     * @param LblNomeUsuPresta
      */
-    public TelaPrincipalPresta(String nmUsuario) {
+    public TelaPrincipalPresta(String LblNomeUsuPresta) {
         initComponents();
-        this.LblNomeUsuPresta.setText(nmUsuario);
+        
+        this.getContentPane().setBackground(new Color(198, 200, 200));
+        Color corMenu = new Color(32, 32, 63); 
+        MenuPrincipalPresta.setBackground(corMenu);
+        MenuPrincipalPresta.setUI(new BasicMenuBarUI());
+        MenuPrincipalPrestaSolici.setForeground(Color.WHITE);
+        MenuPrincipalPrestaAgenda.setForeground(Color.WHITE);
+        MenuPrincipalPrestaLembretes.setForeground(Color.WHITE);
+        MenuPrincipalPrestaPerfil.setForeground(Color.WHITE);
+        
+        this.LblNomeUsuPresta.setText(LblNomeUsuPresta);
         this.LblNomeUsuPresta.setForeground(Color.BLUE);
+        
+        this.setSize(575, 650);
         
     }
 
@@ -27,7 +40,8 @@ public class TelaPrincipalPresta extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-   
+    
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,19 +56,20 @@ public class TelaPrincipalPresta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         LblNomeUsuPresta = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        MenuPrincipalPresta = new javax.swing.JMenuBar();
+        MenuPrincipalPrestaSolici = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        MenuPrincipalPrestaAgenda = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        MenuPrincipalPrestaLembretes = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        MenuPrincipalPrestaPerfil = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         MnSairPrincPrest = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela principal prestador");
+        setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,31 +97,36 @@ public class TelaPrincipalPresta extends javax.swing.JFrame {
 
         LblNomeUsuPresta.setText("Mensagens...");
 
-        jMenu1.setText("Solicitações");
+        MenuPrincipalPresta.setBackground(new java.awt.Color(32, 32, 63));
+        MenuPrincipalPresta.setForeground(new java.awt.Color(255, 255, 255));
+        MenuPrincipalPresta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        MenuPrincipalPresta.setOpaque(true);
+
+        MenuPrincipalPrestaSolici.setText("Solicitações");
 
         jMenuItem1.setText("Acessar");
-        jMenu1.add(jMenuItem1);
+        MenuPrincipalPrestaSolici.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        MenuPrincipalPresta.add(MenuPrincipalPrestaSolici);
 
-        jMenu2.setText("Agenda");
+        MenuPrincipalPrestaAgenda.setText("Agenda");
 
         jMenuItem2.setText("Acessar");
-        jMenu2.add(jMenuItem2);
+        MenuPrincipalPrestaAgenda.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu2);
+        MenuPrincipalPresta.add(MenuPrincipalPrestaAgenda);
 
-        jMenu3.setText("Lembretes");
+        MenuPrincipalPrestaLembretes.setText("Lembretes");
 
         jMenuItem3.setText("Acessar");
-        jMenu3.add(jMenuItem3);
+        MenuPrincipalPrestaLembretes.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu3);
+        MenuPrincipalPresta.add(MenuPrincipalPrestaLembretes);
 
-        jMenu4.setText("Perfil");
+        MenuPrincipalPrestaPerfil.setText("Perfil");
 
         jMenuItem4.setText("Acessar");
-        jMenu4.add(jMenuItem4);
+        MenuPrincipalPrestaPerfil.add(jMenuItem4);
 
         MnSairPrincPrest.setText("Sair");
         MnSairPrincPrest.addActionListener(new java.awt.event.ActionListener() {
@@ -114,45 +134,46 @@ public class TelaPrincipalPresta extends javax.swing.JFrame {
                 MnSairPrincPrestActionPerformed(evt);
             }
         });
-        jMenu4.add(MnSairPrincPrest);
+        MenuPrincipalPrestaPerfil.add(MnSairPrincPrest);
 
-        jMenuBar1.add(jMenu4);
+        MenuPrincipalPresta.add(MenuPrincipalPrestaPerfil);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuPrincipalPresta);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 81, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LblNomeUsuPresta)
                 .addGap(30, 30, 30))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addComponent(LblNomeUsuPresta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(251, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void MnSairPrincPrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSairPrincPrestActionPerformed
@@ -195,22 +216,24 @@ public class TelaPrincipalPresta extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new TelaPrincipalPresta().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblNomeUsuPresta;
+    private javax.swing.JMenuBar MenuPrincipalPresta;
+    private javax.swing.JMenu MenuPrincipalPrestaAgenda;
+    private javax.swing.JMenu MenuPrincipalPrestaLembretes;
+    private javax.swing.JMenu MenuPrincipalPrestaPerfil;
+    private javax.swing.JMenu MenuPrincipalPrestaSolici;
     private javax.swing.JMenuItem MnSairPrincPrest;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;

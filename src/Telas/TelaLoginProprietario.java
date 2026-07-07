@@ -2,6 +2,7 @@
 package Telas;
 
 import AcessoDB.ModuloDbConnect;
+import static AutoHubUtil.ButtonsUtil.ActivateOnEnter;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.swing.JOptionPane;
 
 public class TelaLoginProprietario extends javax.swing.JFrame {
@@ -16,6 +18,21 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
     Connection conexao = null; 
     PreparedStatement pst = null; 
     ResultSet rs = null;
+    
+    public static class SessaoUsuario 
+    {
+        private static int idUsuario;
+
+        public static int getIdUsuarioLogado() 
+        {
+            return idUsuario;
+        }
+
+        public static void setIdUsuarioLogado(int id) 
+        {
+            idUsuario = id;
+        }  
+    } 
         
     public void  logar() 
     {
@@ -32,7 +49,7 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
             
             if  (rs.next())
             { 
-                TelaPrincipalProp tlPrincipalProp = new TelaPrincipalProp(rs.getString(2));
+                TelaPrincipalProp tlPrincipalProp = new TelaPrincipalProp();
                 tlPrincipalProp.setLocationRelativeTo(null);
                 tlPrincipalProp.setVisible(true);
                 this.dispose();
@@ -66,6 +83,16 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
             lblMensagens.setText("ERRO - NÃO CONECTADO!");
             lblMensagens.setForeground(Color.red);
         }
+        
+        lblMensagens.setVisible(false);
+        
+        this.getContentPane().setBackground(new Color(198, 200, 200));
+        this.setSize(575, 650);
+        ActivateOnEnter(BtnCadastrar);
+        ActivateOnEnter(BtnEntrar);
+        ActivateOnEnter(BtnVoltarLogProp);
+        TxtUsuario.requestFocus();
+        TxtUsuario.setCaretPosition(0);
     }
     
 
@@ -82,10 +109,13 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
         BtnCadastrar = new javax.swing.JButton();
         BtnVoltarLogProp = new javax.swing.JButton();
         lblMensagens = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login proprietário");
         setResizable(false);
+
+        PnlLogin.setBackground(new java.awt.Color(198, 200, 200));
 
         LblUsuario.setText("Usuário");
 
@@ -93,17 +123,25 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
 
         TxtUsuario.addActionListener(this::TxtUsuarioActionPerformed);
 
-        BtnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BtnEntrar.setBackground(new java.awt.Color(255, 212, 59));
+        BtnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnEntrar.setForeground(new java.awt.Color(33, 40, 68));
         BtnEntrar.setText("Entrar");
         BtnEntrar.addActionListener(this::BtnEntrarActionPerformed);
 
-        BtnCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        BtnCadastrar.setBackground(new java.awt.Color(32, 32, 63));
+        BtnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         BtnCadastrar.setText("Cadastrar-se");
         BtnCadastrar.addActionListener(this::BtnCadastrarActionPerformed);
 
-        BtnVoltarLogProp.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        BtnVoltarLogProp.setBackground(new java.awt.Color(32, 32, 63));
+        BtnVoltarLogProp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnVoltarLogProp.setForeground(new java.awt.Color(255, 255, 255));
         BtnVoltarLogProp.setText("Voltar");
         BtnVoltarLogProp.addActionListener(this::BtnVoltarLogPropActionPerformed);
+
+        lblMensagens.setText("Mensagens...");
 
         javax.swing.GroupLayout PnlLoginLayout = new javax.swing.GroupLayout(PnlLogin);
         PnlLogin.setLayout(PnlLoginLayout);
@@ -112,20 +150,23 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
             .addGroup(PnlLoginLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LblUsuario)
-                    .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblSenha)
-                    .addComponent(TxtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnEntrar)
-                    .addGroup(PnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(BtnVoltarLogProp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnCadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                    .addComponent(BtnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(PnlLoginLayout.createSequentialGroup()
+                        .addGroup(PnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblUsuario)
+                            .addComponent(LblSenha)
+                            .addComponent(lblMensagens))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(BtnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+                    .addComponent(BtnVoltarLogProp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtUsuario)
+                    .addComponent(TxtSenha))
+                .addContainerGap())
         );
         PnlLoginLayout.setVerticalGroup(
             PnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlLoginLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(LblUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,29 +180,37 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
                 .addComponent(BtnCadastrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnVoltarLogProp)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(lblMensagens)
+                .addContainerGap())
         );
 
-        lblMensagens.setText("Mensagens...");
+        jLabel1.setBackground(new java.awt.Color(32, 32, 63));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Login");
+        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PnlLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblMensagens)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PnlLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
                 .addComponent(PnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblMensagens)
-                .addGap(10, 10, 10))
+                .addGap(162, 162, 162))
         );
 
         pack();
@@ -173,6 +222,29 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtUsuarioActionPerformed
 
     private void BtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEntrarActionPerformed
+         
+        try {
+            conexao = ModuloDbConnect.connector();
+            
+            if (conexao != null) {
+                String sql = "SELECT id_proprietario FROM t_aah_proprietario WHERE ds_nome_usuario = ? ";
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, TxtUsuario.getText());
+
+                rs = pst.executeQuery();
+
+                if (rs.next()) {
+                int idBanco = rs.getInt("id_proprietario");
+                SessaoUsuario.setIdUsuarioLogado(idBanco);
+                System.out.println(idBanco);
+            } else {
+                System.out.println("Nenhum id encontrado no banco");
+            }
+           }
+        }  catch (java.sql.SQLException ex) {
+        getLogger(TelaLoginProprietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    }
+        
         logar();
     }//GEN-LAST:event_BtnEntrarActionPerformed
 
@@ -239,6 +311,7 @@ public class TelaLoginProprietario extends javax.swing.JFrame {
     private javax.swing.JPanel PnlLogin;
     private javax.swing.JPasswordField TxtSenha;
     private javax.swing.JTextField TxtUsuario;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblMensagens;
     // End of variables declaration//GEN-END:variables
 }

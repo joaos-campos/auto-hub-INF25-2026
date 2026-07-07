@@ -89,7 +89,11 @@ public class TelaCadastroPresta extends javax.swing.JFrame {
         
         PostInitComponents();
         
+        this.getContentPane().setBackground(new Color(198, 200, 200));
+        
         conexao = ModuloDbConnect.connector();
+        
+        this.setSize(575, 650);
     }
     private void PostInitComponents()  throws ParseException 
     {   
@@ -357,6 +361,9 @@ public class TelaCadastroPresta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(198, 200, 200));
 
         LblNmEmpresa.setText("Insira o nome da sua empresa");
 
@@ -368,9 +375,15 @@ public class TelaCadastroPresta extends javax.swing.JFrame {
 
         LblTelefone.setText("Telefone");
 
+        BtnAvancar.setBackground(new java.awt.Color(255, 212, 59));
+        BtnAvancar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnAvancar.setForeground(new java.awt.Color(33, 40, 68));
         BtnAvancar.setText("Avançar");
         BtnAvancar.addActionListener(this::BtnAvancarActionPerformed);
 
+        BtnVoltar.setBackground(new java.awt.Color(32, 32, 63));
+        BtnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnVoltar.setForeground(new java.awt.Color(247, 250, 255));
         BtnVoltar.setText("Voltar");
         BtnVoltar.addActionListener(this::BtnVoltarActionPerformed);
 
@@ -419,26 +432,30 @@ public class TelaCadastroPresta extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(LblNmEmpresa)
-                    .addComponent(TxtNmEmpresa)
-                    .addComponent(LblCNPJ)
-                    .addComponent(LblTelefone)
-                    .addComponent(TxtCNPJ)
-                    .addComponent(TxtTelefonePresta)
-                    .addComponent(BtnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblSenhaPresta)
-                    .addComponent(LblEmailPresta)
-                    .addComponent(TxtEmailPresta)
-                    .addComponent(BtnAvancar)
-                    .addComponent(LblNmUsuPresta)
-                    .addComponent(TxtNmUsuPresta, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(TxtSenhaPresta, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(TxtConfSenhaPresta, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(LblConfSenhaPresta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblEmailPresta)
+                            .addComponent(LblTelefone)
+                            .addComponent(LblCNPJ))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(BtnVoltar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnAvancar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TxtConfSenhaPresta, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtSenhaPresta, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtNmUsuPresta, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtEmailPresta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                            .addComponent(TxtTelefonePresta, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtCNPJ, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblNmUsuPresta, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblSenhaPresta, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblConfSenhaPresta, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblNmEmpresa, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtNmEmpresa, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -463,7 +480,7 @@ public class TelaCadastroPresta extends javax.swing.JFrame {
                 .addComponent(LblNmUsuPresta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtNmUsuPresta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LblSenhaPresta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtSenhaPresta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -471,38 +488,43 @@ public class TelaCadastroPresta extends javax.swing.JFrame {
                 .addComponent(LblConfSenhaPresta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtConfSenhaPresta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGap(92, 92, 92)
                 .addComponent(BtnAvancar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnVoltar)
-                .addContainerGap())
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(32, 32, 63));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(247, 250, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Crie uma conta no AutoHub");
+        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jLabel1)
-                .addContainerGap(91, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVoltarActionPerformed

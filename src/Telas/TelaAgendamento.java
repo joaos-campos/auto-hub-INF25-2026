@@ -4,9 +4,11 @@
  */
 package Telas;
 
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.plaf.basic.BasicMenuBarUI;
 
 /**
  *
@@ -19,6 +21,16 @@ public class TelaAgendamento extends javax.swing.JFrame {
      */
     public TelaAgendamento() {
         initComponents();
+        
+        this.getContentPane().setBackground(new java.awt.Color(198, 200, 200));
+        Color corMenu = new Color(32, 32, 63); 
+        MenuAgendamento.setBackground(corMenu);
+        MenuAgendamento.setUI(new BasicMenuBarUI());
+        MenuAgenVeiculo.setForeground(Color.WHITE);
+        MenuAgenLembretes.setForeground(Color.WHITE);
+        MenuAgenPerfil.setForeground(Color.WHITE);
+        
+        this.setSize(575, 650);
     }
 
     /**
@@ -30,7 +42,6 @@ public class TelaAgendamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnVoltar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         LblOrdemServic = new javax.swing.JLabel();
         TxtOrdemServic = new javax.swing.JTextField();
@@ -44,24 +55,21 @@ public class TelaAgendamento extends javax.swing.JFrame {
         LblObs = new javax.swing.JLabel();
         TxtObs = new javax.swing.JTextField();
         BtnSolicitar = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        BtnVoltar = new javax.swing.JButton();
+        MenuAgendamento = new javax.swing.JMenuBar();
+        MenuAgenVeiculo = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        MenuAgenLembretes = new javax.swing.JMenu();
+        MenuAgenPerfil = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        BtnVoltar.setText("<--");
-        BtnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnVoltarActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(198, 200, 200));
 
         LblOrdemServic.setText("Ordem de serviço");
 
@@ -91,37 +99,50 @@ public class TelaAgendamento extends javax.swing.JFrame {
 
         LblObs.setText("Observação do serviço");
 
+        BtnSolicitar.setBackground(new java.awt.Color(255, 212, 59));
+        BtnSolicitar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnSolicitar.setForeground(new java.awt.Color(33, 40, 68));
         BtnSolicitar.setText("Solicitar agendamento");
+
+        BtnVoltar.setBackground(new java.awt.Color(32, 32, 63));
+        BtnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnVoltar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnVoltar.setText("Voltar");
+        BtnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(LblOrdemServic)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtOrdemServic)
-                    .addComponent(TxtObs)
+                    .addComponent(BtnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtObs, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(MenuServicoDesejado, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(MenuTipoManut, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(MenuOficina, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtOrdemServic, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblOrdemServic)
                             .addComponent(LblOficina)
-                            .addComponent(MenuOficina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LblDataServic)
                             .addComponent(LblTipoManut)
-                            .addComponent(MenuTipoManut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LblServicoDesejado)
-                            .addComponent(MenuServicoDesejado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LblObs)
-                            .addComponent(BtnSolicitar))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(LblObs))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(BtnSolicitar, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(LblOrdemServic)
+                .addComponent(LblOrdemServic, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtOrdemServic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -142,15 +163,22 @@ public class TelaAgendamento extends javax.swing.JFrame {
                 .addComponent(LblObs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtObs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addComponent(BtnSolicitar)
-                .addGap(0, 81, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnVoltar)
+                .addGap(67, 67, 67))
         );
 
-        jMenu1.setText("Veículo");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+        MenuAgendamento.setBackground(new java.awt.Color(32, 32, 63));
+        MenuAgendamento.setForeground(new java.awt.Color(255, 255, 255));
+        MenuAgendamento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        MenuAgendamento.setOpaque(true);
+
+        MenuAgenVeiculo.setText("Veículo");
+        MenuAgenVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
+                MenuAgenVeiculoActionPerformed(evt);
             }
         });
 
@@ -160,7 +188,7 @@ public class TelaAgendamento extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        MenuAgenVeiculo.add(jMenuItem3);
 
         jMenuItem4.setText("Cadastrar veículo");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +196,7 @@ public class TelaAgendamento extends javax.swing.JFrame {
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        MenuAgenVeiculo.add(jMenuItem4);
 
         jMenuItem5.setText("Gerenciar veículo");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -176,17 +204,17 @@ public class TelaAgendamento extends javax.swing.JFrame {
                 jMenuItem5ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem5);
+        MenuAgenVeiculo.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu1);
+        MenuAgendamento.add(MenuAgenVeiculo);
 
-        jMenu2.setText("Lembretes");
-        jMenuBar1.add(jMenu2);
+        MenuAgenLembretes.setText("Lembretes");
+        MenuAgendamento.add(MenuAgenLembretes);
 
-        jMenu3.setText("Perfil");
+        MenuAgenPerfil.setText("Perfil");
 
         jMenuItem1.setText("Acessar");
-        jMenu3.add(jMenuItem1);
+        MenuAgenPerfil.add(jMenuItem1);
 
         jMenuItem2.setText("Sair");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -194,19 +222,16 @@ public class TelaAgendamento extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        MenuAgenPerfil.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu3);
+        MenuAgendamento.add(MenuAgenPerfil);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuAgendamento);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 352, Short.MAX_VALUE)
-                .addComponent(BtnVoltar))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -214,13 +239,13 @@ public class TelaAgendamento extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(BtnVoltar)
-                .addGap(36, 36, 36)
+                .addGap(59, 59, 59)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -231,23 +256,23 @@ public class TelaAgendamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void BtnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVoltarActionPerformed
-        TelaPrincipalProp telaPrincipal = new TelaPrincipalProp("");
+        TelaPrincipalProp telaPrincipal = new TelaPrincipalProp();
         telaPrincipal.setLocationRelativeTo(null);
         telaPrincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BtnVoltarActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        TelaGerenciamentoVeiculo telaGerencia;
+    private void MenuAgenVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAgenVeiculoActionPerformed
         try {
-            telaGerencia = new TelaGerenciamentoVeiculo();
+            TelaVeiculo telaGerencia;
+            telaGerencia = new TelaVeiculo();
             telaGerencia.setLocationRelativeTo(null);
             telaGerencia.setVisible(true);
             this.dispose();
         } catch (SQLException ex) {
             Logger.getLogger(TelaAgendamento.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jMenu1ActionPerformed
+    }//GEN-LAST:event_MenuAgenVeiculoActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         TelaCadastroVeiculo telaCadVei = new TelaCadastroVeiculo();
@@ -257,10 +282,14 @@ public class TelaAgendamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        TelaVeiculo telaVeiculos = new TelaVeiculo();
-        telaVeiculos.setLocationRelativeTo(null);
-        telaVeiculos.setVisible(true);
-        this.dispose();
+        try {
+            TelaVeiculo telaVeiculos = new TelaVeiculo();
+            telaVeiculos.setLocationRelativeTo(null);
+            telaVeiculos.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaAgendamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -320,15 +349,15 @@ public class TelaAgendamento extends javax.swing.JFrame {
     private javax.swing.JLabel LblOrdemServic;
     private javax.swing.JLabel LblServicoDesejado;
     private javax.swing.JLabel LblTipoManut;
+    private javax.swing.JMenu MenuAgenLembretes;
+    private javax.swing.JMenu MenuAgenPerfil;
+    private javax.swing.JMenu MenuAgenVeiculo;
+    private javax.swing.JMenuBar MenuAgendamento;
     private javax.swing.JComboBox<String> MenuOficina;
     private javax.swing.JComboBox<String> MenuServicoDesejado;
     private javax.swing.JComboBox<String> MenuTipoManut;
     private javax.swing.JTextField TxtObs;
     private javax.swing.JTextField TxtOrdemServic;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;

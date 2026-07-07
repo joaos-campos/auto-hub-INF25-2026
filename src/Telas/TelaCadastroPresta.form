@@ -3,10 +3,11 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -24,13 +25,13 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="91" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -38,8 +39,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -47,33 +48,45 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c8" green="c8" red="c6" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="LblNmEmpresa" min="-2" max="-2" attributes="0"/>
-                      <Component id="TxtNmEmpresa" max="32767" attributes="0"/>
-                      <Component id="LblCNPJ" min="-2" max="-2" attributes="0"/>
-                      <Component id="LblTelefone" min="-2" max="-2" attributes="0"/>
-                      <Component id="TxtCNPJ" alignment="0" max="32767" attributes="0"/>
-                      <Component id="TxtTelefonePresta" max="32767" attributes="0"/>
-                      <Component id="BtnVoltar" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
-                      <Component id="LblSenhaPresta" min="-2" max="-2" attributes="0"/>
-                      <Component id="LblEmailPresta" min="-2" max="-2" attributes="0"/>
-                      <Component id="TxtEmailPresta" alignment="0" max="32767" attributes="0"/>
-                      <Component id="BtnAvancar" min="-2" max="-2" attributes="0"/>
-                      <Component id="LblNmUsuPresta" min="-2" max="-2" attributes="0"/>
-                      <Component id="TxtNmUsuPresta" alignment="0" min="-2" pref="356" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="TxtSenhaPresta" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TxtConfSenhaPresta" alignment="0" max="32767" attributes="0"/>
-                          <Component id="LblConfSenhaPresta" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="LblEmailPresta" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="LblTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="LblCNPJ" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="BtnVoltar" alignment="0" max="32767" attributes="0"/>
+                              <Component id="BtnAvancar" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TxtConfSenhaPresta" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TxtSenhaPresta" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TxtNmUsuPresta" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TxtEmailPresta" alignment="0" pref="540" max="32767" attributes="0"/>
+                              <Component id="TxtTelefonePresta" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TxtCNPJ" alignment="0" max="32767" attributes="0"/>
+                              <Component id="LblNmUsuPresta" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="LblSenhaPresta" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="LblConfSenhaPresta" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="LblNmEmpresa" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="TxtNmEmpresa" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -100,7 +113,7 @@
                   <Component id="LblNmUsuPresta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="TxtNmUsuPresta" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="LblSenhaPresta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="TxtSenhaPresta" min="-2" max="-2" attributes="0"/>
@@ -108,11 +121,11 @@
                   <Component id="LblConfSenhaPresta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="TxtConfSenhaPresta" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                   <Component id="BtnAvancar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="BtnVoltar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="BtnVoltar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="93" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -146,6 +159,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtnAvancar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="3b" green="d4" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="44" green="28" red="21" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Avan&#xe7;ar"/>
           </Properties>
           <Events>
@@ -154,6 +176,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtnVoltar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="3f" green="20" red="20" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="fa" red="f7" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Voltar"/>
           </Properties>
           <Events>
@@ -246,10 +277,18 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="1"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="3f" green="20" red="20" type="rgb"/>
         </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="16" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="fa" red="f7" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Crie uma conta no AutoHub"/>
+        <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
   </SubComponents>

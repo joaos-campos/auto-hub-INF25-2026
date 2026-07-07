@@ -4,8 +4,10 @@
  */
 package Telas;
 
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
+import javax.swing.plaf.basic.BasicMenuBarUI;
 
 /**
  *
@@ -20,6 +22,17 @@ public class TelaAcompanhamento extends javax.swing.JFrame {
      */
     public TelaAcompanhamento() {
         initComponents();
+        
+        this.getContentPane().setBackground(new java.awt.Color(198, 200, 200));
+        Color corMenu = new Color(32, 32, 63); // Substitua pelo seu RGB
+        MenuAcompanhamento.setBackground(corMenu);
+        MenuAcompanhamento.setUI(new BasicMenuBarUI());
+        MenuAcompVeiculo.setForeground(Color.WHITE);
+        MenuAcompAgendamento.setForeground(Color.WHITE);
+        MenuAcompLembretes.setForeground(Color.WHITE);
+        MenuAcompPerfil.setForeground(Color.WHITE);
+        
+        this.setSize(575, 650);
     }
 
     /**
@@ -36,22 +49,27 @@ public class TelaAcompanhamento extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        MenuAcompanhamento = new javax.swing.JMenuBar();
+        MenuAcompVeiculo = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        MenuAcompAgendamento = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        MenuAcompLembretes = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        MenuAcompPerfil = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela acompanhamento");
+        setBackground(new java.awt.Color(198, 200, 200));
+        setResizable(false);
 
+        BtnVoltar.setBackground(new java.awt.Color(32, 32, 63));
+        BtnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnVoltar.setForeground(new java.awt.Color(247, 250, 255));
         BtnVoltar.setText("Voltar");
         BtnVoltar.addActionListener(this::BtnVoltarActionPerformed);
 
@@ -80,74 +98,82 @@ public class TelaAcompanhamento extends javax.swing.JFrame {
         jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
 
-        jMenu1.setText("Veículo");
+        MenuAcompanhamento.setBackground(new java.awt.Color(32, 32, 63));
+        MenuAcompanhamento.setForeground(new java.awt.Color(247, 250, 255));
+        MenuAcompanhamento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        MenuAcompanhamento.setOpaque(true);
+
+        MenuAcompVeiculo.setText("Veículo");
 
         jMenuItem1.setText("Acessar");
         jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
-        jMenu1.add(jMenuItem1);
+        MenuAcompVeiculo.add(jMenuItem1);
 
         jMenuItem2.setText("Cadastrar veículo");
         jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
-        jMenu1.add(jMenuItem2);
+        MenuAcompVeiculo.add(jMenuItem2);
 
         jMenuItem3.setText("Gerenciar veículo");
         jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
-        jMenu1.add(jMenuItem3);
+        MenuAcompVeiculo.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu1);
+        MenuAcompanhamento.add(MenuAcompVeiculo);
 
-        jMenu2.setText("Agendamento");
+        MenuAcompAgendamento.setText("Agendamento");
 
         jMenuItem4.setText("Acessar");
         jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
-        jMenu2.add(jMenuItem4);
+        MenuAcompAgendamento.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu2);
+        MenuAcompanhamento.add(MenuAcompAgendamento);
 
-        jMenu3.setText("Lembretes");
+        MenuAcompLembretes.setText("Lembretes");
 
         jMenuItem5.setText("Acessar");
-        jMenu3.add(jMenuItem5);
+        MenuAcompLembretes.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu3);
+        MenuAcompanhamento.add(MenuAcompLembretes);
 
-        jMenu4.setText("Perfil");
+        MenuAcompPerfil.setText("Perfil");
 
         jMenuItem6.setText("Acessar");
-        jMenu4.add(jMenuItem6);
+        MenuAcompPerfil.add(jMenuItem6);
 
         jMenuItem7.setText("Sair");
         jMenuItem7.addActionListener(this::jMenuItem7ActionPerformed);
-        jMenu4.add(jMenuItem7);
+        MenuAcompPerfil.add(jMenuItem7);
 
-        jMenuBar1.add(jMenu4);
+        MenuAcompanhamento.add(MenuAcompPerfil);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuAcompanhamento);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LblAgendamentos)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnVoltar))
-                .addGap(0, 169, Short.MAX_VALUE))
+                    .addComponent(BtnVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LblAgendamentos)
+                        .addGap(0, 454, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(92, 92, 92)
                 .addComponent(LblAgendamentos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addComponent(BtnVoltar)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(61, 61, 61))
         );
 
         pack();
@@ -155,10 +181,14 @@ public class TelaAcompanhamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        TelaVeiculo telaVeiculos = new TelaVeiculo();
-        telaVeiculos.setLocationRelativeTo(null);
-        telaVeiculos.setVisible(true);
-        this.dispose();
+        try {
+            TelaVeiculo telaVeiculos = new TelaVeiculo();
+            telaVeiculos.setLocationRelativeTo(null);
+            telaVeiculos.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -169,9 +199,9 @@ public class TelaAcompanhamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        TelaGerenciamentoVeiculo telaGerencia;
         try {
-            telaGerencia = new TelaGerenciamentoVeiculo();
+            TelaVeiculo telaGerencia;
+            telaGerencia = new TelaVeiculo();
             telaGerencia.setLocationRelativeTo(null);
             telaGerencia.setVisible(true);
             this.dispose();
@@ -195,7 +225,7 @@ public class TelaAcompanhamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void BtnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVoltarActionPerformed
-        TelaPrincipalProp telaPrincipal = new TelaPrincipalProp("");
+        TelaPrincipalProp telaPrincipal = new TelaPrincipalProp();
         telaPrincipal.setLocationRelativeTo(null);
         telaPrincipal.setVisible(true);
         this.dispose();
@@ -233,12 +263,12 @@ public class TelaAcompanhamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnVoltar;
     private javax.swing.JLabel LblAgendamentos;
+    private javax.swing.JMenu MenuAcompAgendamento;
+    private javax.swing.JMenu MenuAcompLembretes;
+    private javax.swing.JMenu MenuAcompPerfil;
+    private javax.swing.JMenu MenuAcompVeiculo;
+    private javax.swing.JMenuBar MenuAcompanhamento;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;

@@ -13,7 +13,7 @@ public class ModuloDbConnect {
         // Definir o Driver para o SGBD a ser conectado
         String driver = "com.mysql.jdbc.Driver";
         // Definir as demais variáveis da String de conexão
-        String url = "jdbc:mysql://127.0.0.1:3306/db_aah";
+        String url = "jdbc:mysql://127.0.0.1:3306/db_aah?yearIsDateType=false";
         String user = "root";
         String senha = "cedup123";
         

@@ -4,6 +4,9 @@
  */
 package Telas;
 
+import java.awt.Color;
+import javax.swing.plaf.basic.BasicMenuBarUI;
+
 /**
  *
  * @author ALUNO
@@ -15,6 +18,17 @@ public class TelaGerenciamentoPresta extends javax.swing.JFrame {
      */
     public TelaGerenciamentoPresta() {
         initComponents();
+        
+        this.getContentPane().setBackground(new Color(198, 200, 200));
+        Color corMenu = new Color(32, 32, 63); 
+        MenuGerenPresta.setBackground(corMenu);
+        MenuGerenPresta.setUI(new BasicMenuBarUI());
+        MenuGerenPrestaSolit.setForeground(Color.WHITE);
+        MenuGerenPrestaAgenda.setForeground(Color.WHITE);
+        MenuGerenPrestaLembretes.setForeground(Color.WHITE);
+        MenuGerenPrestaPerfil.setForeground(Color.WHITE);
+        
+        this.setSize(575, 650);
     }
 
     /**
@@ -32,14 +46,14 @@ public class TelaGerenciamentoPresta extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         BtnVoltarGerPresta = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        MenuGerenPresta = new javax.swing.JMenuBar();
+        MenuGerenPrestaSolit = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        MenuGerenPrestaAgenda = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        MenuGerenPrestaLembretes = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        MnSairGerPresta = new javax.swing.JMenu();
+        MenuGerenPrestaPerfil = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
 
@@ -47,15 +61,32 @@ public class TelaGerenciamentoPresta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de gerenciamento");
+        setPreferredSize(new java.awt.Dimension(575, 397));
+        setResizable(false);
 
+        jButton1.setBackground(new java.awt.Color(255, 212, 59));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(33, 40, 68));
         jButton1.setText("Solicitações");
 
+        jButton2.setBackground(new java.awt.Color(255, 212, 59));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(33, 40, 68));
         jButton2.setText("Agendadados");
 
+        jButton3.setBackground(new java.awt.Color(255, 212, 59));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(33, 40, 68));
         jButton3.setText("Em andamento");
 
+        jButton4.setBackground(new java.awt.Color(255, 212, 59));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(33, 40, 68));
         jButton4.setText("Encerrados");
 
+        BtnVoltarGerPresta.setBackground(new java.awt.Color(32, 32, 63));
+        BtnVoltarGerPresta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnVoltarGerPresta.setForeground(new java.awt.Color(255, 255, 255));
         BtnVoltarGerPresta.setText("Voltar");
         BtnVoltarGerPresta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,31 +94,36 @@ public class TelaGerenciamentoPresta extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("Solicitações");
+        MenuGerenPresta.setBackground(new java.awt.Color(32, 32, 63));
+        MenuGerenPresta.setForeground(new java.awt.Color(255, 255, 255));
+        MenuGerenPresta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        MenuGerenPresta.setOpaque(true);
+
+        MenuGerenPrestaSolit.setText("Solicitações");
 
         jMenuItem1.setText("Acessar");
-        jMenu1.add(jMenuItem1);
+        MenuGerenPrestaSolit.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        MenuGerenPresta.add(MenuGerenPrestaSolit);
 
-        jMenu2.setText("Agenda");
+        MenuGerenPrestaAgenda.setText("Agenda");
 
         jMenuItem2.setText("Acessar");
-        jMenu2.add(jMenuItem2);
+        MenuGerenPrestaAgenda.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu2);
+        MenuGerenPresta.add(MenuGerenPrestaAgenda);
 
-        jMenu3.setText("Lembretes");
+        MenuGerenPrestaLembretes.setText("Lembretes");
 
         jMenuItem3.setText("Acessar");
-        jMenu3.add(jMenuItem3);
+        MenuGerenPrestaLembretes.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu3);
+        MenuGerenPresta.add(MenuGerenPrestaLembretes);
 
-        MnSairGerPresta.setText("Perfil");
+        MenuGerenPrestaPerfil.setText("Perfil");
 
         jMenuItem4.setText("Acessar");
-        MnSairGerPresta.add(jMenuItem4);
+        MenuGerenPrestaPerfil.add(jMenuItem4);
 
         jMenuItem5.setText("Sair");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -95,11 +131,11 @@ public class TelaGerenciamentoPresta extends javax.swing.JFrame {
                 jMenuItem5ActionPerformed(evt);
             }
         });
-        MnSairGerPresta.add(jMenuItem5);
+        MenuGerenPrestaPerfil.add(jMenuItem5);
 
-        jMenuBar1.add(MnSairGerPresta);
+        MenuGerenPresta.add(MenuGerenPrestaPerfil);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuGerenPresta);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,18 +143,18 @@ public class TelaGerenciamentoPresta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(BtnVoltarGerPresta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(283, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnVoltarGerPresta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(164, 164, 164)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
@@ -126,12 +162,13 @@ public class TelaGerenciamentoPresta extends javax.swing.JFrame {
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
                 .addComponent(BtnVoltarGerPresta)
-                .addGap(16, 16, 16))
+                .addGap(84, 84, 84))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -190,16 +227,16 @@ public class TelaGerenciamentoPresta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnVoltarGerPresta;
-    private javax.swing.JMenu MnSairGerPresta;
+    private javax.swing.JMenuBar MenuGerenPresta;
+    private javax.swing.JMenu MenuGerenPrestaAgenda;
+    private javax.swing.JMenu MenuGerenPrestaLembretes;
+    private javax.swing.JMenu MenuGerenPrestaPerfil;
+    private javax.swing.JMenu MenuGerenPrestaSolit;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
