@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Detalhes do Veículo</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+  .montserrat-font {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  }
+
+  .roboto-font {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  }
+
+  .poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  }
+  
+  body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #003e4d, #094f58);
+    background-attachment: fixed;
+    color: #e5e7eb;
+    padding-left: 220px;
+    transition: padding-left 0.3s;
+  }
+
+    body.collapsed {
+    padding-left: 70px;
+    }
+
+    .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 220px;
+    background: #1f2933;
+    transition: width 0.3s;
+    overflow: hidden;
+    box-shadow: 3px 0 10px rgba(0,0,0,0.4);
+    z-index: 1000;
+    }
+
+    .sidebar.collapsed { width: 70px; }
+
+    .menu-toggle {
+    font-size: 22px;
+    color: #f7faff;
+    padding: 18px 20px;
+    cursor: pointer;
+    }
+
+    .menu-item-side {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    cursor: pointer;
+    color: #e5e7eb;
+    }
+
+    .menu-item-side:hover { background: #6E1A37; }
+
+    .icon { width: 30px; text-align: center; }
+
+    .text 
+    { 
+        margin-left: 15px; 
+        white-space: nowrap;
+    }
+
+    .sidebar.collapsed .text { display: none; }
+
+  .header {
+    padding: 18px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #f7faff;
+
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .container {
+    padding: 40px;
+    max-width: 800px;
+    margin: auto;
+  }
+
+  .card {
+    background: #1f2933;
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  }
+
+  .title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .info-row {
+    margin-bottom: 12px;
+  }
+
+  .label {
+    font-weight: bold;
+    color: #9ca3af;
+  }
+
+  .menu {
+    background: #1f2933;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  }
+
+  .menu-item {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .menu-item:hover {
+    background: #6E1A37;
+    color: #fff;
+  }
+
+  .back-btn {
+    display: inline-block;
+    margin: 20px 40px;
+    padding: 10px 18px;
+    background: #6E1A37;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+  }
+
+  .back-btn:hover {
+    background: #921530;
+  }
+</style>
+</head>
+<body class="collapsed">
+
+<div class="sidebar collapsed" id="sidebar">
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <div class="menu-item-side"><span class="icon">📅</span><span class="text">Agenda</span></div>
+  <div class="menu-item-side"><span class="icon">⏰</span><span class="text">Lembretes</span></div>
+  <div class="menu-item-side"><span class="icon">👤</span><span class="text">Perfil</span></div>
+</div>
+
+<div class="header">
+  <div>Detalhes do Veículo</div>
+  <div>LOGO</div>
+</div>
+
+<a href="index.html" class="back-btn">← Voltar</a>
+
+<div class="container">
+
+  <div class="card">
+    <div class="title" id="car-name"></div>
+
+    <div class="info-row"><span class="label">Fabricante:</span> <span id="manufacturer"></span></div>
+    <div class="info-row"><span class="label">Modelo:</span> <span id="model"></span></div>
+    <div class="info-row"><span class="label">Ano:</span> <span id="year"></span></div>
+    <div class="info-row"><span class="label">Cor:</span> <span id="color"></span></div>
+    <div class="info-row"><span class="label">Placa:</span> <span id="plate"></span></div>
+  </div>
+
+  <div class="menu">
+    <div class="menu-item">Gerenciar cadastro</div>
+    <div class="menu-item">Histórico veicular</div>
+    <div class="menu-item">Agendar serviços</div>
+    <div class="menu-item">Intercorrências</div>
+  </div>
+
+</div>
+
+<script>
+function toggleMenu() {
+  const sidebar = document.getElementById("sidebar");
+  const body = document.body;
+
+  sidebar.classList.toggle("collapsed");
+  body.classList.toggle("collapsed");
+}
+
+  const cars = {
+    corolla: { name:"Toyota Corolla", manufacturer:"Toyota", model:"Corolla", year:"2022", color:"Branco", plate:"ABC-1234"},
+    civic: { name:"Honda Civic", manufacturer:"Honda", model:"Civic", year:"2021", color:"Cinza", plate:"XYZ-5678"},
+    focus: { name:"Ford Focus", manufacturer:"Ford", model:"Focus", year:"2020", color:"Azul", plate:"DEF-4321"},
+    golf: { name:"Volkswagen Golf", manufacturer:"Volkswagen", model:"Golf", year:"2019", color:"Prata", plate:"GHI-8765"},
+    onix: { name:"Chevrolet Onix", manufacturer:"Chevrolet", model:"Onix", year:"2023", color:"Preto", plate:"JKL-2468"}
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const carKey = params.get("car");
+
+  if (cars[carKey]) {
+    const car = cars[carKey];
+    document.getElementById("car-name").textContent = car.name;
+    document.getElementById("manufacturer").textContent = car.manufacturer;
+    document.getElementById("model").textContent = car.model;
+    document.getElementById("year").textContent = car.year;
+    document.getElementById("color").textContent = car.color;
+    document.getElementById("plate").textContent = car.plate;
+  }
+</script>
+
+</body>
+</html>

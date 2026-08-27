@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Meus Veículos</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #003e4d, #094f58);
+  background-attachment: fixed;
+  color: #e5e7eb;
+
+  padding-left: 220px;
+  transition: padding-left 0.3s;
+}
+
+body.collapsed {
+  padding-left: 70px;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 220px;
+  background: #1f2933;
+  transition: width 0.3s;
+  overflow: hidden;
+  box-shadow: 3px 0 10px rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.menu-toggle {
+  font-size: 22px;
+  color: #f7faff;
+  padding: 18px 20px;
+  cursor: pointer;
+}
+
+.menu-item-side {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  cursor: pointer;
+  color: #e5e7eb;
+  transition: 0.2s;
+}
+
+.menu-item-side:hover {
+  background: #6E1A37;
+}
+
+.icon {
+  font-size: 20px;
+  width: 30px;
+  text-align: center;
+}
+
+.text {
+  margin-left: 15px;
+  white-space: nowrap;
+}
+
+.sidebar.collapsed .text {
+  display: none;
+}
+
+/* HEADER */
+.header {
+  padding: 18px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #f7faff;
+
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+/* REST OF YOUR CSS (UNCHANGED) */
+.container { padding: 40px; max-width: 1100px; margin: auto; }
+
+.register-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 14px;
+}
+
+.plus-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #6E1A37;
+  color: #fff;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+
+.plus-btn:hover {
+  transform: scale(1.05);
+  background: #921530;
+}
+
+.register-label {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f7faff;
+}
+
+.table-container {
+  background: #1f2933;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+thead { background: #6E1A37; color: #fff; }
+
+th, td { padding: 16px 18px; text-align: left; }
+
+tbody tr { border-bottom: 1px solid rgba(255,255,255,0.08); }
+
+tr.clickable-row { cursor: pointer; transition: 0.2s; }
+
+tr.clickable-row:hover { background: rgba(174, 36, 72, 0.25); }
+
+</style>
+</head>
+
+<body class="collapsed">
+
+<!-- SIDEBAR -->
+<div class="sidebar collapsed" id="sidebar">
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <div class="menu-item-side"><span class="icon">📅</span><span class="text">Agenda</span></div>
+  <div class="menu-item-side"><span class="icon">⏰</span><span class="text">Lembretes</span></div>
+  <div class="menu-item-side"><span class="icon">👤</span><span class="text">Perfil</span></div>
+</div>
+
+<div class="header">
+  <div>Meus Veículos</div>
+  <div>LOGO</div>
+</div>
+
+<div class="container">
+  <div class="register-bar">
+    <div class="plus-btn">+</div>
+    <div class="register-label">Cadastrar novo veículo</div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Veículo</th>
+          <th>Fabricante</th>
+          <th>Ano</th>
+          <th>Placa</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr class="clickable-row" data-link="veiculo.html?car=corolla">
+          <td>Corolla</td><td>Toyota</td><td>2022</td><td>ABC-1234</td>
+        </tr>
+        <tr class="clickable-row" data-link="veiculo.html?car=civic">
+          <td>Civic</td><td>Honda</td><td>2021</td><td>XYZ-5678</td>
+        </tr>
+        <tr class="clickable-row" data-link="veiculo.html?car=focus">
+          <td>Focus</td><td>Ford</td><td>2020</td><td>DEF-4321</td>
+        </tr>
+        <tr class="clickable-row" data-link="veiculo.html?car=golf">
+          <td>Golf</td><td>Volkswagen</td><td>2019</td><td>GHI-8765</td>
+        </tr>
+        <tr class="clickable-row" data-link="veiculo.html?car=onix">
+          <td>Onix</td><td>Chevrolet</td><td>2023</td><td>JKL-2468</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function toggleMenu() {
+  const sidebar = document.getElementById("sidebar");
+  const body = document.body;
+
+  sidebar.classList.toggle("collapsed");
+  body.classList.toggle("collapsed");
+}
+
+document.querySelectorAll(".clickable-row").forEach(row => {
+  row.addEventListener("dblclick", () => {
+    window.location.href = row.dataset.link;
+  });
+});
+</script>
+
+</body>
+</html>
