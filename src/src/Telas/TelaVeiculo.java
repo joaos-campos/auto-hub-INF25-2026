@@ -1,0 +1,428 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package Telas;
+
+import AcessoDB.ModuloDbConnect;
+import AcessoDB.ModuloDbDML;
+import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+
+
+public class TelaVeiculo extends javax.swing.JFrame {
+
+    Connection conexao = null;
+    
+    private final int idAtual = TelaLoginProprietario.SessaoUsuario.getIdUsuarioLogado();
+    
+    public TelaVeiculo() 
+    {
+        if (ValidarSeUsuarioLogado())
+        {
+            initComponents();
+            PostInitComponents();
+
+            try {
+                FazerBuscaVeiculos();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            SetTxtVeiculoSearch();
+        }
+    }
+
+    private void PostInitComponents()
+    {
+        this.getContentPane().setBackground(new Color(198, 200, 200));
+        this.setSize(575, 650);
+    }
+    
+    private boolean ValidarSeUsuarioLogado()
+    {
+        if (!(idAtual > 0))
+        {
+            JOptionPane.showMessageDialog(this, "Você precisa estar logado para acessar a tela de veículos! Você será redirecionado para a página de login!");
+            this.dispose();
+            TelaLoginProprietario tlLgProp = new TelaLoginProprietario();
+            tlLgProp.setLocationRelativeTo(null);
+            tlLgProp.setVisible(true);
+            return false;
+        }
+        return true;
+    }
+    
+    private void DefineComponentsBehaviour()
+    {  
+        // <editor-fold defaultstate="collapsed" desc="Define comportamento TxtVeiculo"> 
+        // =================================================================================
+        String TxtNomePlaceholder = "Ex: Honda Civic";
+        
+        TxtVeiculo.setText(TxtNomePlaceholder);
+        
+        TxtVeiculo.addFocusListener(new FocusAdapter() 
+        {
+            @Override
+            public void focusGained(FocusEvent e) 
+            {
+                if (TxtVeiculo.getText().equals(TxtNomePlaceholder)) 
+                {
+                    TxtVeiculo.setText("");
+                    TxtVeiculo.setCaretPosition(0);
+                    TxtVeiculo.setForeground(Color.BLACK);
+                }
+            }
+            
+            @Override
+            public void focusLost(FocusEvent e) 
+            {
+                if (TxtVeiculo.getText().isEmpty() || TxtVeiculo.getText().equals(TxtNomePlaceholder)) 
+                {
+                    TxtVeiculo.setText(TxtNomePlaceholder);
+                    TxtVeiculo.setForeground(Color.GRAY);
+                }
+            }
+        });
+        // =================================================================================
+        // </editor-fold>
+    }
+    
+    private void FazerBuscaVeiculos() throws SQLException
+    {
+        conexao = ModuloDbConnect.connector();
+        
+        ModuloDbDML dbDML = new ModuloDbDML(conexao);
+        
+        DefaultTableModel tableResultado = dbDML.consultarTabela
+        (
+            " SELECT " +
+            " t_aah_marca.nm_marca as Marca, " +
+            " t_aah_veiculo.ds_modelo as Modelo, " +
+            " t_aah_veiculo.nr_ano as Ano, " +
+            " t_aah_veiculo.nr_ano_modelo as `Ano modelo`, " +
+            " t_aah_veiculo.ds_cor as Cor, " +
+            " t_aah_veiculo.ds_placa as Placa " +
+            " FROM t_aah_marca" +
+            " INNER JOIN t_aah_veiculo ON t_aah_marca.id_marca = t_aah_veiculo.id_marca " +
+            " INNER JOIN t_aah_proprietario_veiculo ON t_aah_veiculo.id_veiculo = t_aah_proprietario_veiculo.id_veiculo " +
+            " INNER JOIN t_aah_proprietario ON t_aah_proprietario.id_proprietario = t_aah_proprietario_veiculo.id_proprietario " +
+            " AND t_aah_proprietario.id_proprietario = ? ORDER BY t_aah_proprietario_veiculo.id_propriedade ASC;", idAtual
+        );
+        
+        TblVeiculo.setModel(tableResultado);
+    }
+    
+    private void SetTxtVeiculoSearch()
+    {
+        TxtVeiculo.getDocument().addDocumentListener(new DocumentListener() 
+        {
+            @Override
+            public void insertUpdate(DocumentEvent e) { search(); }
+            @Override
+            public void removeUpdate(DocumentEvent e) { search(); }
+            @Override
+            public void changedUpdate(DocumentEvent e) { search(); }
+
+            private void search() 
+            {
+                String text = TxtVeiculo.getText().trim();
+                if (text.isEmpty() || text.isBlank()) 
+                {
+                    try 
+                    {
+                        FazerBuscaVeiculos();
+                    } 
+                    catch (SQLException ex) 
+                    {
+                        Logger.getLogger(TelaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    return;
+                }
+                try 
+                {
+                    FazerBuscaVeiculoTexto(text);
+                } 
+                catch (SQLException ex) 
+                {
+                    Logger.getLogger(TelaVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    
+    private void FazerBuscaVeiculoTexto(String strModelo) throws SQLException
+    {
+        conexao = ModuloDbConnect.connector();
+        
+        ModuloDbDML dbDML = new ModuloDbDML(conexao);
+      
+        DefaultTableModel tableResultado = dbDML.consultarTabela
+        (
+            " SELECT" +
+            "   t_aah_marca.nm_marca as Marca, " + 
+            "   t_aah_veiculo.ds_modelo as Modelo, " +
+            "   t_aah_veiculo.nr_ano as Ano, " +
+            "   t_aah_veiculo.nr_ano_modelo as `Ano modelo`, " +
+            "   t_aah_veiculo.ds_cor as Cor, " + 
+            "   t_aah_veiculo.ds_placa as Placa " +
+            " FROM t_aah_marca " +
+            "   INNER JOIN t_aah_veiculo ON t_aah_marca.id_marca = t_aah_veiculo.id_marca " +
+            "   INNER JOIN t_aah_proprietario_veiculo ON t_aah_veiculo.id_veiculo = t_aah_proprietario_veiculo.id_veiculo " +
+            "   INNER JOIN t_aah_proprietario ON t_aah_proprietario.id_proprietario = t_aah_proprietario_veiculo.id_proprietario " + 
+            "   AND t_aah_proprietario.id_proprietario = ? " +
+            "   AND t_aah_veiculo.ds_modelo LIKE CONCAT('%', ?, '%')" +
+            "   ORDER BY t_aah_proprietario_veiculo.id_propriedade ASC; ", idAtual, strModelo 
+        );
+        
+        TblVeiculo.setModel(tableResultado);
+    }
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        BtnCadVeiculo = new javax.swing.JButton();
+        BtnVoltar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TblVeiculo = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        TxtVeiculo = new javax.swing.JTextField();
+        BtnGerenciaDados = new javax.swing.JButton();
+        BtnHistorico = new javax.swing.JButton();
+        BtnAgendaServ = new javax.swing.JButton();
+        BtnIntercorrências = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Veículo");
+        setResizable(false);
+
+        BtnCadVeiculo.setBackground(new java.awt.Color(255, 212, 59));
+        BtnCadVeiculo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnCadVeiculo.setForeground(new java.awt.Color(33, 40, 68));
+        BtnCadVeiculo.setText("Cadastrar veículo");
+        BtnCadVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCadVeiculoActionPerformed(evt);
+            }
+        });
+
+        BtnVoltar.setBackground(new java.awt.Color(32, 32, 63));
+        BtnVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnVoltar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnVoltar.setText("Voltar");
+        BtnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVoltarActionPerformed(evt);
+            }
+        });
+
+        TblVeiculo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        TblVeiculo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Marca", "Modelo", "Ano", "Cor", "Placa"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TblVeiculo.setShowGrid(true);
+        TblVeiculo.setSurrendersFocusOnKeystroke(true);
+        jScrollPane1.setViewportView(TblVeiculo);
+        if (TblVeiculo.getColumnModel().getColumnCount() > 0) {
+            TblVeiculo.getColumnModel().getColumn(0).setResizable(false);
+            TblVeiculo.getColumnModel().getColumn(1).setResizable(false);
+            TblVeiculo.getColumnModel().getColumn(2).setResizable(false);
+            TblVeiculo.getColumnModel().getColumn(3).setResizable(false);
+            TblVeiculo.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        jLabel1.setText("Consultar veículo:");
+
+        TxtVeiculo.setToolTipText("Digite o modelo do veículo");
+
+        BtnGerenciaDados.setBackground(new java.awt.Color(255, 212, 59));
+        BtnGerenciaDados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnGerenciaDados.setForeground(new java.awt.Color(33, 40, 68));
+        BtnGerenciaDados.setText("Gerenciar dados");
+
+        BtnHistorico.setBackground(new java.awt.Color(255, 212, 59));
+        BtnHistorico.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnHistorico.setForeground(new java.awt.Color(33, 40, 68));
+        BtnHistorico.setText("Histórico veícular");
+
+        BtnAgendaServ.setBackground(new java.awt.Color(255, 212, 59));
+        BtnAgendaServ.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnAgendaServ.setForeground(new java.awt.Color(33, 40, 68));
+        BtnAgendaServ.setText("Agendar serviços");
+
+        BtnIntercorrências.setBackground(new java.awt.Color(255, 212, 59));
+        BtnIntercorrências.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnIntercorrências.setForeground(new java.awt.Color(33, 40, 68));
+        BtnIntercorrências.setText("Intercorrências");
+
+        jLabel2.setBackground(new java.awt.Color(32, 32, 63));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Meus veículos");
+        jLabel2.setOpaque(true);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TxtVeiculo))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                    .addComponent(BtnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnCadVeiculo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnIntercorrências, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnAgendaServ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnHistorico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnGerenciaDados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(TxtVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnGerenciaDados)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnHistorico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnAgendaServ)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnIntercorrências)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnCadVeiculo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnVoltar)
+                .addGap(23, 23, 23))
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVoltarActionPerformed
+        TelaPrincipalProp telaPrincipal = new TelaPrincipalProp();
+        telaPrincipal.setLocationRelativeTo(null);
+        telaPrincipal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnVoltarActionPerformed
+
+    private void BtnCadVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadVeiculoActionPerformed
+        TelaCadastroVeiculo tlCadVeic = new TelaCadastroVeiculo();
+        tlCadVeic.setLocationRelativeTo(null);
+        tlCadVeic.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnCadVeiculoActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TelaVeiculo().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAgendaServ;
+    private javax.swing.JButton BtnCadVeiculo;
+    private javax.swing.JButton BtnGerenciaDados;
+    private javax.swing.JButton BtnHistorico;
+    private javax.swing.JButton BtnIntercorrências;
+    private javax.swing.JButton BtnVoltar;
+    private javax.swing.JTable TblVeiculo;
+    private javax.swing.JTextField TxtVeiculo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    // End of variables declaration//GEN-END:variables
+}
